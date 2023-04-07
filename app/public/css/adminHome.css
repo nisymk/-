@@ -1,0 +1,56 @@
+/* ヘッダー */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.box2 {
+    background-color: black;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+
+/* 検索とお知らせ */
+
+.form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-list {
+    display: flex;
+    justify-content: center;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user-list {
+    border: solid 2px;
+    display: flex;
+}
+
+.post-list {
+    border: solid 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-list-column {
+    border: solid 2px;
+}
+
+.post-list-column {
+    border: solid 2px;
+}
+
+.list-title {
+    border: solid 2px;
+}
