@@ -32,9 +32,20 @@
             </div>
             <div class="box2"></div>
             <div>
-                <div>
-                    <button class="btn">ログアウト</button>
-                </div>
+                @if(Auth::check())
+                <span class="my-navbar-item">{{ Auth::user()->name }}</span>
+                /
+                <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                <script>
+                    document.getElementById('logout').addEventListener('click', function(event) {
+                        event.preventDefault();
+                        document.getElementById('logout-form').submit();
+                    });
+                </script>
+                @endif
             </div>
         </div>
 
@@ -47,10 +58,10 @@
                 <!-- 管理者お知らせ作成、編集 -->
                 <div>
                     <div>
-                        <button class="btn">お知らせ作成</button>
+                        <a href="{{ route('post.create') }}"><button class="btn">投稿作成</button></a>
                     </div>
                     <div>
-                        <button class="btn">お知らせ編集</button>
+                        <button class="btn">投稿編集</button>
                     </div>
                 </div>
             </div>
@@ -61,22 +72,31 @@
                     <div class="user-list">
                         <div class="box2"></div>
                         <div>
-                            <p>投稿内容</p>
+                            @foreach($posts as $post)
+                            <tr>
+                                <th scope="col">
+                                    <a href="">#</a>
+                                </th>
+                                <th scope='col'>{{ $post['comment'] }}</th>
+                                <th scope="col">
+                                    <a href="">削除</a>
+                                </th>
+                            </tr>
+                            @endforeach
                         </div>
-                        <a href="">削除</a>
                     </div>
                 </div>
                 <div class="list col-md-6">
-                    <p class="list-title">投稿記事一覧</p>
+                    <p class="list-title">お知らせ一覧</p>
                     <div class="post-list"><!-- 投稿記事一覧 -->
                         <div class="post-list-column">
                             <a href="">ユーザー名</a>
-                            <a href="">　投稿記事タイトル</a>
+                            <a href="">お知らせタイトル</a>
                         </div>
                         <div>
                             <div class="box2"></div>
                             <div>
-                                <p>投稿内容</p>
+                                <p>お知らせ内容</p>
                             </div>
                             <a href="">削除</a>
                         </div>
