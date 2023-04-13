@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('layouts.layout')
 @section('content')
 <div class="create-items">
     <div class="form">

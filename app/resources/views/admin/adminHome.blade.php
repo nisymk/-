@@ -1,41 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.layout')
 @section('content')
-
-<body>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
-
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
-
-    <div class="container">
-        <!-- 共通のヘッダー -->
-        <!-- <div class="header">
-            <div>
-                <h3>
-                    管理者ホーム <br /> <span>FOLLOWERS</span>
-                </h3>
-            </div>
-            <div class="box2">
-                <div>
-                    @if(Auth::check())
-                    <span class="my-navbar-item">{{Auth::user()->name}}</span>
-                    /
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
-                    @endif
-                </div>
-            </div>
-        </div> -->
 
         <!-- 検索 -->
         <div class="form">
@@ -48,7 +12,7 @@
                     <a href="{{ route('news.create') }}"><button class="btn">お知らせ作成</button></a>
                 </div>
                 <div>
-                    <button class="btn">お知らせ編集</button>
+                    <a href="{{ route('news.index') }}"><button class="btn">お知らせ一覧画面へ</button></a>
                 </div>
             </div>
         </div>
@@ -62,47 +26,52 @@
                         @foreach($posts as $post)
                         <tr>
                             <th scope="col">
-                                <a href="">#</a>
+                                <a href="">{{ $post['title'] }}</a>
                             </th>
                             <th scope='col'>{{ $post['comment'] }}</th>
                             <th scope="col">
                                 <a href="">削除</a>
                             </th>
                         </tr>
+                        <br>
                         @endforeach
                     </div>
                 </div>
             </div>
-            <div class="list col-md-6">
-                <p class="list-title">投稿記事一覧</p>
-                <div class="post-list"><!-- 投稿記事一覧 -->
-                    <div class="post-list-column">
-                        <a href="">ユーザー名</a>
-                        <div>
-                            @foreach($posts as $post)
-                            <tr>
-                                <th scope="col">
-                                    <a href="">#</a>
-                                </th>
-                                <th scope='col'>{{ $post['title'] }}</th>
-                                <th scope="col">
-                                    <a href="">投稿記事タイトル</a>
-                                </th>
-                                <th scope="col">
-                                    <a href="">削除</a>
-                                </th>
-                            </tr>
-                            @endforeach
-                        </div>
-                    </div>
+        </div>
+        <div class="list col-md-6">
+            <p class="list-title">投稿記事一覧</p>
+            <div class="post-list"><!-- 投稿記事一覧 -->
+                <div class="post-list-column">
+                    <a href="">ユーザー名</a>
                     <div>
-                        <div class="box2"></div>
+                        @foreach($posts as $post)
+                        <tr>
+                            <th scope="col">
+                                <a href="">
+                            <th scope='col'>{{ $post['title']}}</th>
+                            </a>
+                            </th>
+                            <th scope='col'>{{ $post['comment']}}</th>
+                            <th scope="col">
+                                <form action="{{ route('post.destroy', $post['id']) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit">削除</button>
+                                </form>
+                            </th>
+                        </tr>
+                        <br>
+                        @endforeach
                     </div>
+                </div>
+                <div>
+                    <div class="box2"></div>
                 </div>
             </div>
         </div>
+    </div>
 </body>
 @endsection
-
 
 </html>

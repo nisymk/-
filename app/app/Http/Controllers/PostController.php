@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,9 +14,34 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('users/postCreate');
+     
+        $search = $request->input('search');
+
+        $query = User::query()->join('post', 'users.id', 'post.user_id');
+        // dd($query);
+        if ($search) {
+
+            $spaceConversion = mb_convert_kana($search, 's');
+
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+
+            
+            foreach($wordArraySearched as $value) {
+                $query = $query->where('name', 'like', '%'.$value.'%')
+                ->orWhere('comment', 'like', '%'.$value.'%')
+                ->orWhere('title', 'like', '%' . $value . '%');
+            }
+            $posts = $query->get();
+
+        } else {
+            $posts = $query->get();
+        }
+        return view('users/postIndex', [
+                'posts' => $posts,
+                'search' => $search,
+            ]);
     }
 
     /**
@@ -41,7 +67,7 @@ class PostController extends Controller
         $file_name = $request->file('images')->getClientOriginalName();
 
         // 取得したファイル名で保存
-        $request->file('images')->storeAs('public/images', $file_name);
+        $request->file('images')->storeAs('public/usersimages', $file_name);
         // 変数　＝　代入したい値　ブレードのname属性を持ってきている
         $post->title = $request->title;
         $post->images = $file_name;
@@ -73,7 +99,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $posts = Post::findOrFail($id);
+        // dd($news);
+        return view('users/postEdit', ['post' => $posts]);
+
     }
 
     /**
@@ -85,7 +114,28 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+
+        // アップロードされたファイル名を取得
+        $file_name = $request->file('images')->getClientOriginalName();
+
+        // 取得したファイル名で保存
+        // dd($request);
+        $request->file('images')->storeAs('public/usersimages', $file_name);
+        // 変数　＝　代入したい値　ブレードのname属性を持ってきている
+        $post->title = $request->title;
+        $post->images = $file_name;
+        $post->comment = $request->comment;
+
+        $post->save();
+
+        // $colums = ['title', 'images', 'comment'];
+
+        // foreach ($colums as $column) {
+        //     $edits->$column = $request->$column;
+        // }
+        // $edits->save();
+        return redirect('/post');
     }
 
     /**
@@ -96,6 +146,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // where('id', $id) == find($id)
+        POST::find($id)->delete();
+        return redirect('/post');
     }
 }

@@ -2,11 +2,12 @@
 @section('content')
 <div class="create-items">
     <div class="form">
-        <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('news.update', $news['id']) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="input-form">
                 <label for="title">タイトル</label>
-                <input name="title">
+                <input name="title" value="{{ old('title', $news['title']) }}">
             </div>
             <div class="input-form">
                 <label for="images">画像</label>

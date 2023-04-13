@@ -20,6 +20,7 @@ class HomeController extends Controller
         //  （TODO）ユーザー画面にNewsを表示する
         if (Auth::user()->role === 1) {
             $news = News::all();
+            // dd($news);
             // dd($posts);
             // return view('users/userHome');
             return view('users/userHome', [
@@ -27,10 +28,10 @@ class HomeController extends Controller
             ]);
         }else{
             $posts = Post::all();
-            // dd($posts);
             // return view('users/userHome');
             return view('admin/adminHome', [
                 'posts' => $posts,
+                // dd($posts),
             ]);
         }
     }
@@ -87,7 +88,7 @@ class HomeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**

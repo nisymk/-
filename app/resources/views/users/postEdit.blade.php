@@ -1,13 +1,13 @@
-@extends('layouts.app')
-
+@extends('layouts.layout')
 @section('content')
 <div class="create-items">
     <div class="form">
-        <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('post.update', $post['id']) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="input-form">
                 <label for="title">タイトル</label>
-                <input name="title">
+                <input name="title" value="{{ old('title', $post['title']) }}">
             </div>
             <div class="input-form">
                 <label for="images">画像</label>

@@ -13,6 +13,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserInfoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,5 +33,6 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::put('/news/{news}', [NewsController::class, 'update'])->name('news.update');
     // Route::delete('/news/{news}', [NewsController::class, 'destroy'])->name('news.destroy');
     Route::resource('post', 'PostController');
+    Route::resource('user_info', 'UserInfoController');
 });
 

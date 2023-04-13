@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
@@ -14,7 +15,12 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $news = News::all();
+        // dd($posts);
+        // return view('users/userHome');
+        return view('admin/newsIndex', [
+            'news' => $news,
+        ]);
     }
 
     /**
@@ -36,15 +42,17 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $news = new News;
+        $id = Auth::id();
         // アップロードされたファイル名を取得
         $file_name = $request->file('images')->getClientOriginalName();
 
         // 取得したファイル名で保存
-        $request->file('images')->storeAs('public/images',$file_name);
+        $request->file('images')->storeAs('public/adminimages',$file_name);
         // 変数　＝　代入したい値　ブレードのname属性を持ってきている
         $news->title = $request->title;
         $news->images = $file_name;
         $news->comment = $request->comment;
+
 
         $news->save();
 
@@ -70,7 +78,9 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $news = News::findOrFail($id);
+        // dd($news);
+        return view('admin/newsEdit', ['news' => $news]);
     }
 
     /**
@@ -82,7 +92,28 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $news = News::find($id);
+
+        // アップロードされたファイル名を取得
+        $file_name = $request->file('images')->getClientOriginalName();
+
+        // 取得したファイル名で保存
+        $request->file('images')->storeAs('public/adminimages', $file_name);
+        // 変数　＝　代入したい値　ブレードのname属性を持ってきている
+        $news->title = $request->title;
+        $news->images = $file_name;
+        $news->comment = $request->comment;
+
+        $news->save();
+
+        // $colums = ['title', 'images', 'comment'];
+
+        // foreach ($colums as $column) {
+        //     $edits->$column = $request->$column;
+        // }
+        // $edits->save();
+
+        return redirect('/news');
     }
 
     /**

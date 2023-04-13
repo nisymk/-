@@ -1,109 +1,55 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.layout')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/adminHome.css') }}">
-
-    <title>Welcome to my website</title>
-</head>
+@section('content')
 
 <body>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
-
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
-
-    <div class="container">
-        <!-- 共通のヘッダー -->
-        <div class="header">
+    <!-- 検索 -->
+    <div class="form">
+        <div>
+            <button class="btn">検索</button>
+        </div>
+        <!-- 管理者お知らせ作成、編集 -->
+        <div>
             <div>
-                <h3>
-                    バドミントン交流アプリ <br /> <span>FOLLOWERS</span>
-                </h3>
+                <a href="{{ route('post.create') }}"><button class="btn">投稿作成</button></a>
             </div>
-            <div class="box2"></div>
             <div>
-                @if(Auth::check())
-                <span class="my-navbar-item">{{ Auth::user()->name }}</span>
-                /
-                <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-                <script>
-                    document.getElementById('logout').addEventListener('click', function(event) {
-                        event.preventDefault();
-                        document.getElementById('logout-form').submit();
-                    });
-                </script>
-                @endif
+                <a href="{{ route('post.index') }}"><button class="btn">投稿一覧画面へ</button></a>
             </div>
         </div>
+    </div>
+    <img src="{{ asset('storage/adminimages/5183ef65b82a66cf573f324e59cf028b.jpeg') }} " width="900" height="400">
 
-        <body>
-            <!-- 検索 -->
-            <div class="form">
-                <div>
-                    <button class="btn">検索</button>
+    <!-- 情報一覧 -->
+    <div class="info-list">
+        <div class="list col-md-6">
+            <p class="list-title">お知らせ一覧</p>
+            <div class="post-list"><!-- 投稿記事一覧 -->
+                <div class="post-list-column">
+                    <a href="">お知らせタイトル</a>
                 </div>
-                <!-- 管理者お知らせ作成、編集 -->
                 <div>
                     <div>
-                        <a href="{{ route('post.create') }}"><button class="btn">投稿作成</button></a>
+                        <p>お知らせ内容</p>
                     </div>
                     <div>
-                        <button class="btn">投稿編集</button>
+                        @foreach($news as $new)
+                        <tr>
+                            <img src="{{ asset('storage/adminimages/'.$new['images']) }} " width="100" height="100">
+                            <th scope="col">
+                                <a href="">{{ $new['title'] }}</a>
+                            </th>
+                            <th scope='col'>{{ $new['comment'] }}</th>
+                        </tr>
+                        <br>
+                        @endforeach
                     </div>
                 </div>
             </div>
-            <!-- 情報一覧 -->
-            <div class="info-list">
-                <div class="list col-md-5"><!-- ユーザー一覧 -->
-                    <p class="list-title">ユーザー 一覧</p>
-                    <div class="user-list">
-                        <div class="box2"></div>
-                        <div>
-                            @foreach($posts as $post)
-                            <tr>
-                                <th scope="col">
-                                    <a href="">#</a>
-                                </th>
-                                <th scope='col'>{{ $post['comment'] }}</th>
-                                <th scope="col">
-                                    <a href="">削除</a>
-                                </th>
-                            </tr>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-                <div class="list col-md-6">
-                    <p class="list-title">お知らせ一覧</p>
-                    <div class="post-list"><!-- 投稿記事一覧 -->
-                        <div class="post-list-column">
-                            <a href="">ユーザー名</a>
-                            <a href="">お知らせタイトル</a>
-                        </div>
-                        <div>
-                            <div class="box2"></div>
-                            <div>
-                                <p>お知らせ内容</p>
-                            </div>
-                            <a href="">削除</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </body>
+        </div>
+    </div>
 </body>
+</body>
+@endsection
 
 </html>
