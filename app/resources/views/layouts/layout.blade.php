@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>バドミントン交流アプリ</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
@@ -27,32 +27,34 @@
         <div class="header">
             <div>
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <h2> バドミントン交流アプリ</h2>
+                    バドミントン交流アプリ
                 </a>
             </div>
-            <!-- ログインユーザーのアイコン表示 -->
-            <a href="{{ route('user_info.index') }}">
-                @if(Auth::user()->userinfo != null && Auth::user()->userinfo->images != null)
-                <img src="{{ asset('storage/usersimages/'.Auth::user()->userinfo->images) }} " width="100" height="100">
-                @else
-                <img src="{{ asset('defalticon.png') }} " width="100" height="100">
-                @endif
-            </a>
-            <div>
-                @if(Auth::check())
-                <span class="my-navbar-item">{{ Auth::user()->name }}</span>
-                /
-                <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-                <script>
-                    document.getElementById('logout').addEventListener('click', function(event) {
-                        event.preventDefault();
-                        document.getElementById('logout-form').submit();
-                    });
-                </script>
-                @endif
-            </div>
+            <form class="d-flex">
+                <!-- ログインユーザーのアイコン表示 -->
+                <a href="{{ route('user_info.index') }}">
+                    @if(Auth::user()->userinfo != null && Auth::user()->userinfo->images != null)
+                    <img src="{{ asset('storage/usersimages/'.Auth::user()->userinfo->images) }} " width="100" height="100">
+                    @else
+                    <img src="{{ asset('defalticon.png') }} " width="100" height="100">
+                    @endif
+                </a>
+                <div>
+                    @if(Auth::check())
+                    <span class="my-navbar-item">{{ Auth::user()->name }}</span>
+                    /
+                    <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <script>
+                        document.getElementById('logout').addEventListener('click', function(event) {
+                            event.preventDefault();
+                            document.getElementById('logout-form').submit();
+                        });
+                    </script>
+                    @endif
+                </div>
+            </form>
         </div>
         @yield('content')

@@ -117,7 +117,7 @@ class UserInfoController extends Controller
         }
 
         // 取得したファイル名で保存
-        dd($request->name);
+        // dd($request->name);
         // 変数　＝　代入したい.値　ブレードのname属性を持ってきている
         $userinfo->user= $request->name;
         $userinfo->sports = $request->sports;

@@ -3,15 +3,14 @@
 @section('content')
 <div class="container">
     <div class="col-md-12 col-xs-12" align="center">
-        <div class="outter"><img src="http://lorempixel.com/output/people-q-c-100-100-1.jpg" class="image-circle" /></div>
-        <h1>Hi Guest</h1>
-        <span>INDIAN</span>
+        <div class="outter">
+            <img src="{{ asset('storage/adminimages/5183ef65b82a66cf573f324e59cf028b.jpeg') }} " width="800" height="400">
+        </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
-
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
