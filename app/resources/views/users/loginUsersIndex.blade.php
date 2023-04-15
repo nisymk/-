@@ -14,7 +14,7 @@
                 </div>
             </form>
             <div>
-                @if($loginuser_info !=null && $loginuser_info->images != null)
+                @if($loginuser_info != null && $loginuser_info->images != null)
                 <img src="{{ asset('storage/usersimages/'.$loginuser_info['images']) }}" width="100" height="100">
                 @else
                 <img src="{{ asset('defalticon.png') }} " width="100" height="100">

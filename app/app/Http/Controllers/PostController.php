@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateData;
 use App\Post;
 use App\User;
 use Illuminate\Http\Request;
@@ -26,7 +27,6 @@ class PostController extends Controller
             $spaceConversion = mb_convert_kana($search, 's');
 
             $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
-
             
             foreach($wordArraySearched as $value) {
                 $query = $query->where('name', 'like', '%'.$value.'%')
@@ -60,7 +60,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateData $request)
     {
         $post = new Post;
         // アップロードされたファイル名を取得
@@ -112,7 +112,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateData $request, $id)
     {
         $post = Post::find($id);
 

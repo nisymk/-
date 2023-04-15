@@ -22,7 +22,7 @@
                 <div>
                     @foreach($posts as $post)
                     <tr>
-                        <a href="{{ route('user_info.show', $post['id']) }}">
+                        <a href="{{ route('user_info.show', $post['user_id']) }}">
                             <img src="{{ asset('storage/usersimages/'.$post['images']) }} " width="100" height="100">
                         </a>
                         <th scope='col'>{{ $post['name']}}</th>
@@ -32,16 +32,18 @@
                             </a>
                         </th>
                         <th scope='col'>{{ $post['comment']}}</th>
+                        @if(Auth::id() === $post['user_id'])
                         <th scope="col">
+                            <a href="{{ route('post.edit', $post['id']) }}">
+                                編集
+                            </a>
                             <form action="{{ route('post.destroy', $post['id']) }}" method="post">
-                                <a href="{{ route('post.edit', $post['id']) }}">
-                                    編集
-                                </a>
                                 @csrf
                                 @method('delete')
                                 <button type="submit">削除</button>
                             </form>
                         </th>
+                        @endif
                     </tr>
                     <br>
                     @endforeach

@@ -1,6 +1,17 @@
 @extends('layouts.layout')
 @section('content')
 <div class="create-items">
+    <div class="panel-body">
+        @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $message)
+                <li>{{ $message }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+    </div>
     <div class="form">
         {{ $user_info !== "" ? $user_info : null }}
         <form action="{{ route('user_info.update', Auth::id()) }}" method="POST" enctype="multipart/form-data">

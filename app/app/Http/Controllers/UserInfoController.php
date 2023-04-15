@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateData;
 use App\News;
 use App\Post;
 use App\User;
@@ -21,12 +22,10 @@ class UserInfoController extends Controller
         if (Auth::user()->role === 1) {
             $news = News::all();
             $posts = Post::all();
-            $userinfo= UserInfo::all();
+            $userinfo = UserInfo::all();
             $users = Auth::user();
-            $loginuserinfo = UserInfo::with('user')->where('user_id', Auth::id())->first();
-            // $loginuserinfos = UserInfo::with('user')->get();
-            // dd($users);
-            // return view('users/userHome');
+            $loginuserinfo = $users->userinfo;
+
             return view('users/loginUsersIndex', [
                 'news' => $news,
                 'posts' => $posts,
@@ -73,10 +72,11 @@ class UserInfoController extends Controller
      */
     public function show($id)
     {
-        $userlists = UserInfo::with('post')->where('user_id', 'user_id');
-        return view('users/userList', [
-            // dd($userlists),
-            'userlists' => $userlists,
+        $user = User::find($id);
+        $news = News::all();
+        return view('users/userDetail', [
+            'user' => $user,
+            'news' => $news,
         ]);
     }
 
@@ -106,8 +106,7 @@ class UserInfoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $userinfo = UserInfo::find($id);
-
+        $userinfo = UserInfo::where('user_id', Auth::id())->first();
 
         // アップロードされたファイル名を取得
         if($request->file('images') !== null) {
@@ -119,12 +118,21 @@ class UserInfoController extends Controller
         // 取得したファイル名で保存
         // dd($request->name);
         // 変数　＝　代入したい.値　ブレードのname属性を持ってきている
-        $userinfo->user= $request->name;
-        $userinfo->sports = $request->sports;
-        $userinfo->prefecture = $request->prefecture;
-        $userinfo->comment = $request->comment;
-
-        $userinfo->save();
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->save();
+        if (!empty($request->sports)) {
+            $userinfo->sports = $request->sports;
+        }
+        if (!empty($request->prefecture)){
+            $userinfo->prefecture = $request->prefecture;
+        }
+        if (!empty($request->comment)){
+            $userinfo->comment = $request->comment;
+        }
+        if (!empty($request->sports) || !empty($request->prefecture) || !empty($request->comment)) {
+            $userinfo->save();
+        }
 
         // $colums = ['title', 'images', 'comment'];
 

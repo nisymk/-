@@ -11,7 +11,7 @@ class User extends Authenticatable
     use Notifiable;
 
     public function post() {
-        return $this->belongsTo('App\Post', 'user_id', 'id');
+        return $this->hasMany('App\Post', 'user_id', 'id');
     }
     public function userinfo()
     {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateData;
 use App\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,8 +42,12 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'title' => 'required|max:50',
+            'comment' => 'required|max:500',
+            'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
+        ]);
         $news = new News;
-        $id = Auth::id();
         // アップロードされたファイル名を取得
         $file_name = $request->file('images')->getClientOriginalName();
 
@@ -56,7 +61,7 @@ class NewsController extends Controller
 
         $news->save();
 
-        return redirect('/');
+        return redirect('/news')->with('flash_message', 'お知らせを作成しました');
     }
 
     /**
@@ -92,6 +97,11 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'title' => 'required|max:50',
+            'comment' => 'required|max:500',
+            'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
+        ]);
         $news = News::find($id);
 
         // アップロードされたファイル名を取得
@@ -124,6 +134,7 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        News::find($id)->delete();
+        return redirect('/news')->with('flash_message', 'お知らせを削除しました');
     }
 }

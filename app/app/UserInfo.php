@@ -6,10 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserInfo extends Model
 {
+    protected $guarded = ['id'];
+    protected $table = 'user_info'; 
+
     public function user()
     {
-        return $this->hasOne('App\User', 'id', 'user_id');
+        return $this->belongsTo('App\User', 'id', 'user_id');
     }
-    protected $table = 'user_info'; 
-    protected $guarded = ['id'];
+    public function post()
+    {
+        return $this->hasMany('App\Post', 'id', 'user_id');
+    }
 }
