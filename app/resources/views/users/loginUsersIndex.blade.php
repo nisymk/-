@@ -16,7 +16,7 @@
                 @if($loginuser_info != null && $loginuser_info->images != null)
                 <img src="{{ asset('storage/usersimages/'.$loginuser_info['images']) }}" width="100" height="100">
                 @else
-                <img src="{{ asset('defalticon.png') }} " width="100" height="100">
+                <img src="{{ asset('defalticon.png') }}" width="100" height="100">
                 @endif
                 <div scope='col'>{{ $loginuser_info ? Auth::user()->name : '' }}</div>
             </div>
@@ -32,6 +32,10 @@
                         ユーザー情報編集
                     </a>
                 </th>
+                <!-- ここでuser_infoDBの情報を取得したい -->
+                <th scope='col'>{{ $loginuser_info['name']}}</th>
+                <th scope='col'>{{ $loginuser_info['title']}}</th>
+                <th scope='col'>{{ $loginuser_info['comment']}}</th>
                 <div>
                     <a href="{{ route('post.index') }}"><button class="btn">投稿一覧画面へ</button></a>
                 </div>
@@ -44,19 +48,24 @@
                     @foreach($favorites as $favorite)
                     <tr>
                         @if ($favorite['user_id'] == Auth::id())
-                        <th scope="col">
-                            <a href="">
-                                <img src="{{ asset('storage/adminimages/'.$favorite->news->images) }} " width="100" height="100">
-                            </a>
-                        </th>
-                        <th scope='col'>{{ $favorite->news->name }}</th>
-                        <th scope='col'>{{ $favorite->news->title }}</th>
-                        <th scope='col'>{{ $favorite->news->comment }}</th>
+                        <div class="card d-flex flex-row bd-highlight mb-3" style="width: 50rem;">
+                            <div class="card-body">
+                                <a href="">
+                                    <img src="{{ asset('storage/adminimages/'.$favorite->news->images) }} " width="100" height="100">
+                                </a>
+                            </div>
+                            <div>
+                                <p class="text-dark">{{ $favorite->news->name }}</p>
+                                <p class="text-dark">{{ $favorite->news->title }}</p>
+                                <p class="text-dark">{{ $favorite->news->comment }}</p>
+                            </div>
+                        </div>
                         @endif
                     </tr>
                     <br>
                     @endforeach
                 </div>
+
                 <div>
                     <div>
                         <p>参加予定イベント</p>
@@ -64,14 +73,17 @@
                     @foreach($events as $event)
                     <tr>
                         @if ($event['user_id'] == Auth::id())
-                        <th scope="col">
-                            <a href="">
-                                <img src="{{ asset('storage/adminimages/'.$event->eventnews->images) }} " width="100" height="100">
-                            </a>
-                        </th>
-                        <th scope='col'>{{ $event->eventnews->name }}</th>
-                        <th scope='col'>{{ $event->eventnews->title }}</th>
-                        <th scope='col'>{{ $event->eventnews->comment }}</th>
+                        <div class="card d-flex flex-row bd-highlight mb-3" style="width: 50rem;">
+                            <div class="card-body">
+                                <a href="">
+                                    <img src="{{ asset('storage/adminimages/'.$event->eventnews->images) }} " width="100" height="100"> </a>
+                            </div>
+                            <div>
+                                <p class="text-dark">{{ $event->eventnews->name }}</p>
+                                <p class="text-dark">{{ $event->eventnews->title }}</p>
+                                <p class="text-dark">{{ $event->eventnews->comment }}</p>
+                            </div>
+                        </div>
                         @endif
                     </tr>
                     <br>

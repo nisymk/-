@@ -15,22 +15,42 @@
         </div>
         <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="input-form">
-                <label for="title">タイトル</label>
-                <input name="title" id="title" value="{{ old('title') }}">
-            </div>
-            <div class="input-form">
-                <label for="images">画像</label>
-                <input type="file" name="images" id="images">
-            </div>
-            <div class=" input-form">
-                <label for="comment">投稿内容</label>
-                <textarea name="comment" id="comment">{{ old('comment') }}</textarea>
-            </div>
-            <div class="input-form">
-                <input type="submit" value="Submit">
+            <div class="create-items form-group">
+                <div class="d-flex justify-content-around">
+                    <div class="card" style="width: 45rem; height: 40rem;">
+                        <div class="card-header bg-primary text-center">
+                            投稿フォーム
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="input-form">
+                                    <label for="title"></label>
+                                    <input name="title" id="title" class="form-control text-center" placeholder="タイトル" value="{{ old('title') }}">
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="input-form">
+                                    <span class="btn btn-primary d-block mx-auto">
+                                        <label for="images">画像を選択</label>
+                                        <input type="file" style="display:none" name="images" id="images" class="form-control">
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class=" form-group">
+                                    <label for="comment"></label>
+                                    <textarea name="comment" id="comment" class="form-control text-center" placeholder="投稿内容">{{ old('comment') }}</textarea>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="input-form">
+                                    <input type="submit" class="btn btn-primary mx-auto d-block" value="お知らせを作成">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
-</div>
-@endsection
+    @endsection

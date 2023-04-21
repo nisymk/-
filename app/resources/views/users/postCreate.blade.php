@@ -30,7 +30,7 @@
                             </li>
                             <li class="list-group-item">
                                 <div class="input-form">
-                                    <span class="btn btn-primary">
+                                    <span class="btn btn-primary d-block mx-auto">
                                         <label for="images">画像を選択</label>
                                         <input type="file" style="display:none" name="images" id="images" class="form-control">
                                     </span>
@@ -44,7 +44,7 @@
                             </li>
                             <li class="list-group-item">
                                 <div class="input-form">
-                                    <input type="submit" class="btn btn-primary" value="つぶやく">
+                                    <input type="submit" class="btn btn-primary d-block mx-auto" value="つぶやく">
                                 </div>
                             </li>
                         </ul>

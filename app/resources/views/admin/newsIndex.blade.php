@@ -7,20 +7,20 @@
 @endif
 <!-- 検索 -->
 <div class="form">
-    <div>
+    <!-- <div>
         <button class="btn">検索</button>
-    </div>
+    </div> -->
     <!-- 管理者お知らせ作成、編集 -->
     <div>
         <div>
-            <a href="{{ route('news.create') }}"><button class="btn">お知らせ作成</button></a>
+            <a href="{{ route('news.create') }}"><button class="btn btn-primary">お知らせ作成</button></a>
         </div>
     </div>
 </div>
 <!-- 情報一覧 -->
 <div class="info-list">
     <div class="list col-md-5"><!-- ユーザー一覧 -->
-        <p class="list-title">お知らせ 一覧</p>
+        <p class="list-title bg-primary">お知らせ 一覧</p>
         <div class="user-list">
             <div class="box2">
                 <div>

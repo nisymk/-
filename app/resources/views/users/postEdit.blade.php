@@ -74,7 +74,7 @@
                                 </div>
                             </li>
                             <li class="list-group-item">
-                                <div class=" form-group">
+                                <div class="form-group">
                                     <label for="comment"></label>
                                     <textarea name="comment" id="comment" class="form-control" placeholder="投稿内容">{{ old('comment', $post['comment']) }}</textarea>
                                 </div>
@@ -89,8 +89,6 @@
                 </div>
             </div>
         </form>
-
-
     </div>
 </div>
 @endsection

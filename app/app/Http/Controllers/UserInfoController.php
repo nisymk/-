@@ -88,9 +88,12 @@ class UserInfoController extends Controller
     {
         $user = User::find($id);
         $news = News::all();
+        $events = Event::all();
+        
         return view('users/userDetail', [
             'user' => $user,
             'news' => $news,
+            'events' => $events,
         ]);
     }
 

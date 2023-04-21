@@ -24,24 +24,24 @@
         </div>
     </div>
     <div>
-        @foreach($news as $new)
-        <div class="container">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="{{ asset('storage/adminimages/'.$new['images']) }} " width="100" height="100">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <p class="card-text">{{ $new['title'] }}</p>
-                            <p class="card-text">{{ $new['comment'] }}</p>
-                        </div>
-                        <!-- 参加するイベントの表示をする -->
-                    </div>
-                </div>
-            </div>
+        <div>
+            <p>参加予定イベント</p>
         </div>
+        @foreach($events as $event)
+        <tr>
+            @if ($event['user_id'] == Auth::id())
+            <th scope="col">
+                <a href="">
+                    <img src="{{ asset('storage/adminimages/'.$event->eventnews->images) }} " width="100" height="100">
+                </a>
+            </th>
+            <th scope='col'>{{ $event->eventnews->name }}</th>
+            <th scope='col'>{{ $event->eventnews->title }}</th>
+            <th scope='col'>{{ $event->eventnews->comment }}</th>
+            @endif
+        </tr>
+        <br>
+        @endforeach
     </div>
-    @endforeach
 </div>
 @endsection

@@ -3,7 +3,7 @@
 <div class="container">
     <div class="navigation-example" style="background-image: url('./assets/img//bg.jpg');">
         <nav class="navbar navbar-expand-lg bg-info">
-            <div class="container">
+            <div class="container justify-content-between">
                 <div class="navbar-translate">
                     <a class="navbar-brand " href="{{ url('/') }}">ホーム画面に戻る</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,65 +53,39 @@
                     @endforeach
                 </tr> -->
                 @foreach($posts as $post)
-                <tr>
-                    <th scope='col'>
+                <div class="card d-flex flex-row bd-highlight mb-3" style="width: 100rem;">
+                    <div class="card-body">
                         @if($post != null && $post->images != null)
-                        <p>投稿画像： <img src="{{ asset('storage/usersimages/'.$post['images']) }} " width="100" height="100">
+                        <p class="text-dark">投稿画像： <img src="{{ asset('storage/usersimages/'.$post['images']) }}" width="100" height="100">
+                        </p>
+                        @else
+                        <p class="text-dark">投稿画像： <img src="{{ asset('defobado.png') }}" width="100" height="100">
                         </p>
                         @endif
-                    </th>
-                    <th scope='col'>
-                        <p>ユーザー名：{{ $post['name']}}</p>
-                    </th>
-                    <th scope='col'>
-                        <p>投稿タイトル：{{ $post['title']}}</p>
-                    </th>
-                    <th scope='col'>
-                        <p>投稿内容： {{ $post['comment']}}
-                        </p>
-                    </th>
-                    @if(Auth::id() === $post['user_id'])
-                    <th scope="col">
-                        <a href="{{ route('post.edit', $post['id']) }}">
-                            編集
+                    </div>
+                    <div>
+                        <a href="{{ route('user_info.show', $user_info['user_id']) }}">
+                            <p class="text-dark">ユーザー名：{{ $post['name']}}</p>
                         </a>
-                        <form action="{{ route('post.destroy', $post['id']) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button type="submit">削除</button>
-                        </form>
-                    </th>
-                    @endif
-                </tr>
+                        <p class="text-dark">投稿タイトル：{{ $post['title']}}</p>
+                        <p class="text-dark">投稿内容： {{ $post['comment']}}</p>
+                        @if(Auth::id() === $post['user_id'])
+                        <th scope="col">
+                            <a href="{{ route('post.edit', $post['id']) }}">
+                                編集
+                            </a>
+                            <form action="{{ route('post.destroy', $post['id']) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="text-dark">削除</button>
+                            </form>
+                        </th>
+                        @endif
+                    </div>
+                </div>
                 <br>
                 @endforeach
             </div>
-
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row no-gutters">
-                    <div class="col-md-4">
-                        <img src="" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <!-- <div class="card-body"> -->
-                            <!-- <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
-                            <div class="card" style="width: 45rem;">
-                                <div class="card-header">
-                                    Featured
-                                </div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">An item</li>
-                                    <li class="list-group-item">A second item</li>
-                                    <li class="list-group-item">A third item</li>
-                                </ul>
-                            </div>
-                        <!-- </div> -->
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>

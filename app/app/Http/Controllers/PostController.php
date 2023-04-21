@@ -160,6 +160,6 @@ class PostController extends Controller
     {
         // where('id', $id) == find($id)
         POST::find($id)->delete();
-        return redirect('/');
+        return redirect('/post');
     }
 }

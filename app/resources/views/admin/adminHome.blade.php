@@ -3,16 +3,27 @@
 
 <!-- 検索 -->
 <div class="form">
-    <div>
+    <!-- <div>
         <button class="btn">検索</button>
     </div>
+    <form method="GET" action="{{ route('post.index') }}" class="form-inline ml-auto">
+        @csrf
+        <div class="form-group has-white bmd-form-group">
+            <input type="search" placeholder="Search" name="search" class="form-control" value="@if (isset($search)) {{ $search }} @endif">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-white btn-raised btn-fab btn-round">
+                <i class="material-icons">search</i>
+            </button>
+        </div>
+    </form> -->
     <!-- 管理者お知らせ作成、編集 -->
     <div>
         <div>
-            <a href="{{ route('news.create') }}"><button class="btn">お知らせ作成</button></a>
+            <a href="{{ route('news.create') }}"><button class="btn btn-primary">お知らせ作成</button></a>
         </div>
         <div>
-            <a href="{{ route('news.index') }}"><button class="btn">お知らせ一覧画面へ</button></a>
+            <a href="{{ route('news.index') }}"><button class="btn btn-primary mt-1">お知らせ一覧画面へ</button></a>
         </div>
     </div>
 </div>
@@ -56,15 +67,11 @@
     <p class="list-title">投稿記事一覧</p>
     <div class="post-list"><!-- 投稿記事一覧 -->
         <div class="post-list-column">
-            <a href="">ユーザー名</a>
+            <p href="">ユーザー名</p>
             <div>
                 @foreach($posts as $post)
                 <tr>
-                    <th scope="col">
-                        <a href="">
                     <th scope='col'>{{ $post['title']}}</th>
-                    </a>
-                    </th>
                     <th scope='col'>{{ $post['comment']}}</th>
                     <th scope="col">
                         <form action="{{ route('post.destroy', $post['id']) }}" method="post">
