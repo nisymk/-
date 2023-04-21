@@ -5,13 +5,12 @@
     <p class="list-title">投稿記事一覧</p>
     <div class="post-list"><!-- 投稿記事一覧 -->
         <div class="post-list-column">
-            <a href="">ユーザー名</a>
             <form method="GET" action="{{ route('post.index') }}">
                 @csrf
-                <input type="search" placeholder="ユーザー名を入力" name="search" value="@if (isset($search)) {{ $search }} @endif">
+                <!-- <input type="search" placeholder="" name="search" value="@if (isset($search)) {{ $search }} @endif">
                 <div>
                     <button type="submit">検索</button>
-                </div>
+                </div> -->
             </form>
             <div>
                 @if($loginuser_info != null && $loginuser_info->images != null)
@@ -37,45 +36,50 @@
                     <a href="{{ route('post.index') }}"><button class="btn">投稿一覧画面へ</button></a>
                 </div>
             </div>
-            <div>
+            <div class="d-flex justify-content-between">
                 <div>
-                    <p>お気に入りのお知らせ</p>
+                    <div>
+                        <p>お気に入りのお知らせ</p>
+                    </div>
+                    @foreach($favorites as $favorite)
+                    <tr>
+                        @if ($favorite['user_id'] == Auth::id())
+                        <th scope="col">
+                            <a href="">
+                                <img src="{{ asset('storage/adminimages/'.$favorite->news->images) }} " width="100" height="100">
+                            </a>
+                        </th>
+                        <th scope='col'>{{ $favorite->news->name }}</th>
+                        <th scope='col'>{{ $favorite->news->title }}</th>
+                        <th scope='col'>{{ $favorite->news->comment }}</th>
+                        @endif
+                    </tr>
+                    <br>
+                    @endforeach
                 </div>
-                @foreach($news as $new)
-                <tr>
-                    <th scope="col">
-                        <a href="">
-                            <img src="{{ asset('storage/adminimages/'.$new['images']) }} " width="100" height="100">
-                        </a>
-                    </th>
-                    <th scope='col'>{{ $new['name'] }}</th>
-                    <th scope='col'>{{ $new['title'] }}</th>
-                    <th scope='col'>{{ $new['comment'] }}</th>
-                </tr>
-                <br>
-                @endforeach
-            </div>
-            <div>
                 <div>
-                    <p>参加予定イベント</p>
+                    <div>
+                        <p>参加予定イベント</p>
+                    </div>
+                    @foreach($events as $event)
+                    <tr>
+                        @if ($event['user_id'] == Auth::id())
+                        <th scope="col">
+                            <a href="">
+                                <img src="{{ asset('storage/adminimages/'.$event->eventnews->images) }} " width="100" height="100">
+                            </a>
+                        </th>
+                        <th scope='col'>{{ $event->eventnews->name }}</th>
+                        <th scope='col'>{{ $event->eventnews->title }}</th>
+                        <th scope='col'>{{ $event->eventnews->comment }}</th>
+                        @endif
+                    </tr>
+                    <br>
+                    @endforeach
                 </div>
-                @foreach($posts as $post)
-                <tr>
-                    <th scope="col">
-                        <a href="">
-                            <img src="{{ asset('storage/adminimages/'.$new['images']) }} " width="100" height="100">
-                        </a>
-                    </th>
-                    <th scope='col'>{{ $post['name']}}</th>
-                    <th scope='col'>{{ $post['title']}}</th>
-                    <th scope='col'>{{ $post['comment']}}</th>
-                </tr>
-                <br>
-                @endforeach
             </div>
         </div>
     </div>
-</div>
 </div>
 </body>
 @endsection

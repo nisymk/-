@@ -22,34 +22,40 @@
     <div class="list col-md-5"><!-- ユーザー一覧 -->
         <p class="list-title">お知らせ 一覧</p>
         <div class="user-list">
-            <div class="box2"></div>
-            <div>
-                @foreach($news as $new)
-                <tr>
-                    <th scope="col">
-                        <a href="">{{ $new['title'] }}</a>
-                    </th>
-                    <th scope='col'>{{ $new['comment'] }}</th>
-                    <th scope="col">
-                        <a href="{{ route('news.edit', $new['id']) }}">
-                            編集
-                        </a>
-                    </th>
-                    <th scope="col">
-                        <form action="{{ route('news.destroy', $new['id']) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button type="submit">削除</button>
-                        </form>
-                    </th>
-                </tr>
-                @endforeach
+            <div class="box2">
+                <div>
+                    <a href="/">ホーム画面へ戻る</a>
+                </div>
+                <div>
+                    @foreach($news as $new)
+                    <tr>
+                        <th scope="col">
+                            <img src="{{ asset('storage/adminimages/'.$new['images']) }} " width="100" height="100">
+                        </th>
+                        <th scope="col">
+                            <span>{{ $new['title'] }}</span>
+                        </th>
+                        <th scope='col'>{{ $new['comment'] }}</th>
+                        <th scope="col">
+                            <button>
+                                <a href="{{ route('news.edit', $new['id']) }}">
+                                    編集
+                                </a>
+                            </button>
+                        </th>
+                        <th scope="col">
+                            <form action="{{ route('news.destroy', $new['id']) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit">削除</button>
+                            </form>
+                        </th>
+                    </tr>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
 </div>
 </body>
 @endsection

@@ -22,7 +22,7 @@
             </div>
             <div class="input-form">
                 <div>
-                    <img src="{{ asset('storage/usersimages/'.$news['images']) }} " width="100" height="100">
+                    <img src="{{ asset('storage/adminimages/'.$news['images']) }} " width="100" height="100">
                 </div>
                 <label for="images">画像</label>
                 <input type="file" name="images" id="images">

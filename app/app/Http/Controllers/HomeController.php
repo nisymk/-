@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Favorite;
 use App\News;
 use App\Post;
+use App\User;
+use App\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,18 +22,29 @@ class HomeController extends Controller
     {
         //  （TODO）ユーザー画面にNewsを表示する
         if (Auth::user()->role === 1) {
-            $news = News::all();
-            // dd($news);
-            // dd($posts);
-            // return view('users/userHome');
-            return view('users/userHome', [
-                'news' => $news,
-            ]);
+            $userinfos = UserInfo::where('user_id', Auth::id())->first();
+            // dd($userinfos);
+            if ($userinfos != null) {
+                $news = News::all();
+                $like_model = new Favorite;
+                return view('users/userHome', [
+                    'news' => $news,
+                    'like_model' => $like_model,
+                ]);
+            } else {
+                $userinfo = UserInfo::where('user_id', Auth::id())->first();
+                return view('users/loginUsersNullEdit', [
+                    'user_info' => $userinfo,
+                ]);
+            }
         }else{
             $posts = Post::all();
-            // return view('users/userHome');
+            $users = New User;
+            $userinfos = $users->join('user_info', 'users.id', 'user_id')->get();
             return view('admin/adminHome', [
                 'posts' => $posts,
+                'users' => $users,
+                'userinfos' => $userinfos,
                 // dd($posts),
             ]);
         }
@@ -99,6 +113,8 @@ class HomeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        User::find($id)->delete();
+        UserInfo::where('user_id', $id)->delete();
+        return redirect('/');
     }
 }

@@ -13,25 +13,84 @@
             </div>
             @endif
         </div>
+        <!-- <form action="{{ route('post.update', $post['id']) }}" method="POST" enctype="multipart/form-data"> -->
+        <!-- @csrf -->
+        <!-- @method('PUT') -->
+        <!-- <div class="input-form"> -->
+        <!-- <label for="title">タイトル</label>
+        <input name="title" value="{{ old('title', $post['title']) }}"> -->
+        <!-- </div> -->
+        <!-- <div> -->
+        <!-- <img src="{{ asset('storage/usersimages/'.$post['images']) }} " width="100" height="100"> -->
+        <!-- @if($post != null && $post->images != null)
+            <img src="{{ asset('storage/usersimages/'.$post['images']) }} " width="100" height="100">
+            @else
+            <img src="{{ asset('defobado.png') }} " width="100" height="100">
+            @endif
+        </div> -->
+        <!-- <div class="input-form">
+            <label for="images">画像</label>
+            <input type="file" name="images">
+        </div> -->
+        <!-- <div class=" input-form"> -->
+        <!-- <label for="comment">投稿内容</label>
+        <textarea name="comment" id="comment">{{ old('comment', $post['comment']) }}</textarea> -->
+        <!-- </div> -->
+        <!-- <div class="input-form">
+            <input type="submit" value="Submit">
+        </div>
+        </form> -->
+
         <form action="{{ route('post.update', $post['id']) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="input-form">
-                <label for="title">タイトル</label>
-                <input name="title" value="{{ old('title', $post['title']) }}">
-            </div>
-            <div class="input-form">
-                <label for="images">画像</label>
-                <input type="file" name="images">
-            </div>
-            <div class=" input-form">
-                <label for="comment">投稿内容</label>
-                <textarea name="comment"></textarea>
-            </div>
-            <div class="input-form">
-                <input type="submit" value="Submit">
+            <div class="create-items form-group">
+                <div class="d-flex justify-content-around">
+                    <div class="card" style="width: 45rem; height: 40rem;">
+                        <div class="card-header bg-primary">
+                            つぶやき編集フォーム
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <div class="input-form">
+                                    <label for="title">タイトル</label>
+                                    <input name="title" id="title" class="form-control" placeholder="タイトル" value="{{ old('title', $post['title']) }}">
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div>
+                                    <!-- <img src="{{ asset('storage/usersimages/'.$post['images']) }} " width="100" height="100"> -->
+                                    @if($post != null && $post->images != null)
+                                    <img src="{{ asset('storage/usersimages/'.$post['images']) }} " width="100" height="100">
+                                    @else
+                                    <img src="{{ asset('defobado.png') }} " width="100" height="100">
+                                    @endif
+                                </div>
+                                <div class="input-form">
+                                    <span class="btn btn-primary">
+                                        <label for="images">画像を選択</label>
+                                        <input type="file" style="display:none" name="images" id="images" class="form-control">
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class=" form-group">
+                                    <label for="comment"></label>
+                                    <textarea name="comment" id="comment" class="form-control" placeholder="投稿内容">{{ old('comment', $post['comment']) }}</textarea>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="input-form">
+                                    <input type="submit" class="btn btn-primary" value="編集してつぶやく">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </form>
+
+
     </div>
 </div>
 @endsection

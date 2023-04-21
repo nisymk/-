@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateData;
 use App\Post;
 use App\User;
+use App\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,8 @@ class PostController extends Controller
     {
      
         $search = $request->input('search');
-
+        // $user_info = Post::query()->join('user_info', 'users.id', 'user_info.user_id');
+        $user_infos = UserInfo::where('user_id', Auth::id())->get();
         $query = User::query()->join('post', 'users.id', 'post.user_id');
         // dd($query);
         if ($search) {
@@ -41,6 +43,7 @@ class PostController extends Controller
         return view('users/postIndex', [
                 'posts' => $posts,
                 'search' => $search,
+                'user_infos' => $user_infos,
             ]);
     }
 
@@ -60,24 +63,29 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateData $request)
+    public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'title' => 'required|max:50',
+            'comment' => 'required|max:500',
+        ]);
         $post = new Post;
         // アップロードされたファイル名を取得
-        $file_name = $request->file('images')->getClientOriginalName();
-
+        if ($request->file('images') !== null) {
+            $file_name = $request->file('images')->getClientOriginalName();
+            $request->file('images')->storeAs('public/usersimages', $file_name);
+            $post->images = $file_name;
+        }
         // 取得したファイル名で保存
-        $request->file('images')->storeAs('public/usersimages', $file_name);
         // 変数　＝　代入したい値　ブレードのname属性を持ってきている
         $post->title = $request->title;
-        $post->images = $file_name;
         $post->comment = $request->comment;
         // Auth::id() でログインしているユーザー（idのみ可能）
         $post->user_id = Auth::id();
     
         $post->save();
 
-        return redirect('/');
+        return redirect('/post');
     }
 
     /**
@@ -112,19 +120,23 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateData $request, $id)
+    public function update(Request $request, $id)
     {
+        $validatedData = $request->validate([
+            'title' => 'required|max:50',
+            'comment' => 'required|max:500',
+        ]);
         $post = Post::find($id);
 
         // アップロードされたファイル名を取得
-        $file_name = $request->file('images')->getClientOriginalName();
+        if ($request->file('images') !== null) {
+            $file_name = $request->file('images')->getClientOriginalName();
+            $request->file('images')->storeAs('public/usersimages', $file_name);
+            $post->images = $file_name;
+        }
 
-        // 取得したファイル名で保存
-        // dd($request);
-        $request->file('images')->storeAs('public/usersimages', $file_name);
         // 変数　＝　代入したい値　ブレードのname属性を持ってきている
         $post->title = $request->title;
-        $post->images = $file_name;
         $post->comment = $request->comment;
 
         $post->save();
@@ -148,6 +160,6 @@ class PostController extends Controller
     {
         // where('id', $id) == find($id)
         POST::find($id)->delete();
-        return redirect('/post');
+        return redirect('/');
     }
 }

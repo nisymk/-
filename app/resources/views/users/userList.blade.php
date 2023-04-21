@@ -6,14 +6,14 @@
     <div class="post-list"><!-- 投稿記事一覧 -->
         <div class="post-list-column">
             <a href="">ユーザー名</a>
-            <form method="GET" action="{{ route('post.index') }}">
+            <!-- <form method="GET" action="{{ route('post.index') }}">
                 @csrf
                 <input type="search" placeholder="ユーザー名を入力" name="search" value="@if (isset($search)) {{ $search }} @endif">
                 <div>
                     <button type="submit">検索</button>
                 </div>
             </form>
-            <div>
+            <div> -->
                 <img src="{{ $userlists['images'] }}" width="100" height="100">
                 <th scope='col'>{{ $userlists['user']['name'] }}</th>
             </div>

@@ -13,6 +13,9 @@
             </div>
         </div>
         <div>
+            <a href="/">ホーム画面へ戻る</a>
+        </div>
+        <div>
             <ul class="list-group">
                 <li class="list-group-item">出身県　{{ $user->userinfo->prefecture }}</li>
                 <li class="list-group-item">スポーツ歴　{{$user->userinfo->sports }}</li>
@@ -26,10 +29,7 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
-                        <svg class="bd-placeholder-img" width="100%" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Image">
-                            <title>Placeholder</title>
-                            <rect fill="#868e96" width="100%" height="100%" /><text fill="#dee2e6" dy=".3em" x="50%" y="50%"><img src="{{ asset('storage/adminimages/'.$new['images']) }} " width="100" height="100"></text>
-                        </svg>
+                        <img src="{{ asset('storage/adminimages/'.$new['images']) }} " width="100" height="100">
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        @endforeach
     </div>
+    @endforeach
 </div>
 @endsection
