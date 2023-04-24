@@ -128,28 +128,32 @@
                 @endif
             </div>
             <div class="form">
-                <form action="{{ route('user_info.update', Auth::id()) }}" method="POST" enctype="multipart/form-data" style="height: 80rem;">
+                <form action="{{ route('user_info.update', Auth::id()) }}" method="POST" enctype="multipart/form-data" style="height: 60rem;">
                     @csrf
                     @method('PUT')
-                    <div class="create-items">
+                    <div class="create-items form-group">
                         <div class="d-flex justify-content-around">
-                            <div>
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <div class="input-form">
+                            <div class="" style="width: 45rem; height: 80rem;">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item text-center">
+                                        <div class="d-block mx-auto">
                                             @if($user_info !=null && $user_info->images != null)
                                             <img src="{{ asset('storage/usersimages/'.$user_info['images']) }}" width="100" height="100">
                                             @else
                                             <img src="{{ asset('defalticon.png') }} " width="100" height="100">
                                             @endif
-                                            <label for="images" class="text-dark">アイコン画像</label>
-                                            <input type="file" name="images">
+                                        </div>
+                                        <div class="input-form">
+                                            <span class="btn btn-primary d-block mx-auto mt-2">
+                                                <label for="images">画像を選択</label>
+                                                <input type="file" style="display:none" name="images" id="images" class="form-control">
+                                            </span>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="input-form">
                                             <label for="name" class="text-dark">ユーザー名</label>
-                                            <input name="name" class="text-dark" value="{{ old('name', Auth::user()->name) }}" placeholder="ユーザー名">
+                                            <input name="name" class="form-control text-dark" id="name" value="{{ old('name', Auth::user()->name) }}" placeholder="ユーザー名">
                                         </div>
                                     </li>
                                     <li class="list-group-item">
@@ -161,13 +165,13 @@
                                     <li class="list-group-item">
                                         <div class="input-form">
                                             <label for="prefecture" class="text-dark">出身県</label>
-                                            <input name="prefecture" value="{{ old('prefecture', $user_info ? $user_info['prefecture'] : '') }}" class="text-dark" placeholder="出身県">
+                                            <input name="prefecture" id="prefecture" class="form-control text-dark" value="{{ old('prefecture', $user_info ? $user_info['prefecture'] : '') }}" placeholder="出身県">
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="input-form" class="text-dark">
                                             <label for="sports" class="text-dark">スポーツ歴</label>
-                                            <textarea name="sports" class="text-dark" placeholder="スポーツ歴">{{ old('sports', $user_info ? $user_info['sports'] : '') }}</textarea>
+                                            <textarea name="sports" id="sports" class="text-dark form-control" placeholder="スポーツ歴">{{ old('sports', $user_info ? $user_info['sports'] : '') }}</textarea>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
@@ -176,8 +180,8 @@
                                             <textarea class="form-control" id="exampleFormControlTextarea1" class="text-dark" name="comment" id="comment" placeholder="自己紹介">{{ old('comment', $user_info ? $user_info['comment']: '') }}</textarea>
                                         </div>
                                     </li>
-                                    <li class="input-form text-dark list-group-item">
-                                        <input type="submit" value="保存">
+                                    <li class="input-form text-dark list-group-item text-center">
+                                        <input type="submit" class="btn btn-primary mb-4" value="保存">
                                         <!-- <a href="/">ホームへ戻る</a> -->
                                     </li>
                                 </ul>

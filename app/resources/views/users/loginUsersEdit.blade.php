@@ -41,7 +41,7 @@
                             <li class="list-group-item">
                                 <div class="input-form">
                                     <label for="name" class="text-dark">ユーザー名</label>
-                                    <input name="name" class="form-control" id="name" placeholder="ユーザー名" value="{{ old('name', Auth::user()->name) }}" required>
+                                    <input name="name" class="form-control" id="name" placeholder="ユーザー名" value="{{ old('name', Auth::user()->name) }}" required placeholder="ユーザー名">
                                 </div>
                             </li>
                             <li class="list-group-item">
@@ -65,7 +65,7 @@
                             <li class="list-group-item">
                                 <div class="form-group">
                                     <label for="comment" class="text-dark">自己紹介</label>
-                                    <textarea name="comment" id="comment" class="form-control" placeholder="投稿内容">{{ old('comment', $user_info ? $user_info['comment']: '') }}</textarea>
+                                    <textarea name="comment" id="comment" class="form-control" placeholder="自己紹介">{{ old('comment', $user_info ? $user_info['comment']: '') }}</textarea>
                                 </div>
                             </li>
                             <li class="list-group-item text-center">
