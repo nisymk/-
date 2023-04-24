@@ -1,10 +1,12 @@
 $(function() {
     var event = $('.js-event-toggle');
+    var eventsCount = $('.eventsCount');
+    console.log(eventsCount);
     var eventNewsId;
 
     event.on('click', function() {
-        console.log(1);
         var $this = $(this);
+
         eventNewsId = $this.data('eventid');
         $.ajax({
             headers: {
@@ -22,7 +24,7 @@ $(function() {
                 //lovedクラスを追加
                 $this.toggleClass('event');
                 //.eventsCountの次の要素のhtmlを「data.posteventsCount」の値に書き換える
-                $this.next('.eventsCount').html('参加をやめる');
+                $this.toggleClass('open');
             })
             // Ajaxリクエストが失敗した場合
             .fail(function(data, xhr, err) {

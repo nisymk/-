@@ -142,42 +142,42 @@
                                             @else
                                             <img src="{{ asset('defalticon.png') }} " width="100" height="100">
                                             @endif
-                                            <label for="images">アイコン画像</label>
+                                            <label for="images" class="text-dark">アイコン画像</label>
                                             <input type="file" name="images">
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="input-form">
-                                            <label for="name">ユーザー名</label>
-                                            <input name="name" value="{{ old('name', Auth::user()->name) }}">
+                                            <label for="name" class="text-dark">ユーザー名</label>
+                                            <input name="name" class="text-dark" value="{{ old('name', Auth::user()->name) }}" placeholder="ユーザー名">
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="input-form">
-                                            <label for="prefecture">出身県</label>
-                                            <input name="prefecture" value="{{ old('prefecture', $user_info ? $user_info['prefecture'] : '') }}">
+                                            <label for="age" class="text-dark">年齢</label>
+                                            <input name="age" id="age" class="form-control text-dark" placeholder="年齢" value="{{ old('age', $user_info ? $user_info['age'] : '') }}">
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="input-form">
-                                            <label for="sports">スポーツ歴</label>
-                                            <textarea name="sports">{{ old('sports', $user_info ? $user_info['sports'] : '') }}</textarea>
+                                            <label for="prefecture" class="text-dark">出身県</label>
+                                            <input name="prefecture" value="{{ old('prefecture', $user_info ? $user_info['prefecture'] : '') }}" class="text-dark" placeholder="出身県">
                                         </div>
                                     </li>
                                     <li class="list-group-item">
-                                        <!-- <div class="input-form">
-                                    <label for="comment">自己紹介</label>
-                                    <textarea name="comment">{{ old('comment', $user_info ? $user_info['comment']: '') }}</textarea>
-                                </div> -->
-                                        <div class="form-group input-form">
-                                            <label for="exampleFormControlTextarea1 comment">自己紹介</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment" id="comment">
-                                            {{ old('comment', $user_info ? $user_info['comment']: '') }}
-                                            </textarea>
+                                        <div class="input-form" class="text-dark">
+                                            <label for="sports" class="text-dark">スポーツ歴</label>
+                                            <textarea name="sports" class="text-dark" placeholder="スポーツ歴">{{ old('sports', $user_info ? $user_info['sports'] : '') }}</textarea>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="input-form">
+                                            <label for="exampleFormControlTextarea1 comment" class="text-dark">自己紹介</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" class="text-dark" name="comment" id="comment" placeholder="自己紹介">{{ old('comment', $user_info ? $user_info['comment']: '') }}</textarea>
                                         </div>
                                     </li>
                                 </ul>
-                                <div class="input-form">
+                                <div class="input-form text-dark">
                                     <input type="submit" value="保存">
                                     <!-- <a href="/">ホームへ戻る</a> -->
                                 </div>

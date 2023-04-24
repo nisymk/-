@@ -18,7 +18,7 @@
             @method('PUT')
             <div class="create-items form-group">
                 <div class="d-flex justify-content-around">
-                    <div class="card" style="width: 45rem; height: 30rem;">
+                    <div class="card" style="width: 45rem; height: 10rem;">
                         <div class="card-header bg-primary">
                             ユーザー情報編集フォーム
                         </div>
@@ -41,7 +41,13 @@
                             <li class="list-group-item">
                                 <div class="input-form">
                                     <label for="name" class="text-dark">ユーザー名</label>
-                                    <input name="name" class="form-control" id="name" placeholder="ユーザー名" value="{{ old('name', Auth::user()->name) }}">
+                                    <input name="name" class="form-control" id="name" placeholder="ユーザー名" value="{{ old('name', Auth::user()->name) }}" required>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <div class="input-form">
+                                    <label for="age" class="text-dark">年齢</label>
+                                    <input name="age" id="age" class="form-control" placeholder="年齢" value="{{ old('age', $user_info ? $user_info['age'] : '') }}">
                                 </div>
                             </li>
                             <li class="list-group-item">
@@ -59,14 +65,12 @@
                             <li class="list-group-item">
                                 <div class="form-group">
                                     <label for="comment" class="text-dark">自己紹介</label>
-                                    <textarea name="comment" id="comment" class="form-control" placeholder="投稿内容">
-                                    {{ old('comment', $user_info ? $user_info['comment']: '') }}
-                                    </textarea>
+                                    <textarea name="comment" id="comment" class="form-control" placeholder="投稿内容">{{ old('comment', $user_info ? $user_info['comment']: '') }}</textarea>
                                 </div>
                             </li>
                             <li class="list-group-item text-center">
                                 <div class="input-form">
-                                    <input type="submit" class="btn btn-primary" value=" 保存">
+                                    <input type="submit" class="btn btn-primary mb-4" value=" 保存">
                                     <!-- <a href="/">ホームへ戻る</a> -->
                                 </div>
                             </li>

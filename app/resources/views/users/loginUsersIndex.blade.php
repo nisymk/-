@@ -1,8 +1,8 @@
 @extends('layouts.layout')
 @section('content')
 
-<div class="list col-md-6">
-    <p class="list-title">投稿記事一覧</p>
+<div class="list">
+    <!-- <p class="list-title"></p> -->
     <div class="post-list"><!-- 投稿記事一覧 -->
         <div class="post-list-column">
             <form method="GET" action="{{ route('post.index') }}">
@@ -12,52 +12,53 @@
                     <button type="submit">検索</button>
                 </div> -->
             </form>
-            <div>
-                @if($loginuser_info != null && $loginuser_info->images != null)
-                <img src="{{ asset('storage/usersimages/'.$loginuser_info['images']) }}" width="100" height="100">
-                @else
-                <img src="{{ asset('defalticon.png') }}" width="100" height="100">
-                @endif
-                <div scope='col'>{{ $loginuser_info ? Auth::user()->name : '' }}</div>
-            </div>
-            <div>
-                <tr>
-                    <th scope='col'>{{ $loginuser_info ? $loginuser_info['age'] : '' }}</th>
-                    <th scope='col'>{{ $loginuser_info ? $loginuser_info['comment'] : '' }}</th>
-                </tr>
-            </div>
-            <div>
-                <th scope="col">
-                    <a href="{{ route('user_info.edit', $users['id']) }}">
-                        ユーザー情報編集
-                    </a>
-                </th>
-                <!-- ここでuser_infoDBの情報を取得したい -->
-                <th scope='col'>{{ $loginuser_info['name']}}</th>
-                <th scope='col'>{{ $loginuser_info['title']}}</th>
-                <th scope='col'>{{ $loginuser_info['comment']}}</th>
+            <!--  -->
+            <div class="d-flex justify-content-center">
+                <div class="mr-2 card" style="height: 152px;">
+                    @if($loginuser_info != null && $loginuser_info->images != null)
+                    <img src="{{ asset('storage/usersimages/'.$loginuser_info['images']) }}" width="100" height="100">
+                    @else
+                    <img src="{{ asset('defalticon.png') }}" width="100" height="100">
+                    @endif
+                </div>
                 <div>
-                    <a href="{{ route('post.index') }}"><button class="btn">投稿一覧画面へ</button></a>
+                    <ul class="list-group">
+                        <li class="list-group-item text-dark">名前：{{ $users['name'] }}</li>
+                        <li class="list-group-item text-dark">年齢：{{ $loginuser_info['age']}}歳</li>
+                        <li class="list-group-item text-dark">出身県：{{ $loginuser_info['prefecture']}}</li>
+                        <li class="list-group-item text-dark">スポーツ歴：{{ $loginuser_info['sports']}}</li>
+                        <li class="list-group-item text-dark">自己紹介：{{ $loginuser_info['comment']}}</li>
+                    </ul>
+                    <th scope="col">
+                        <a href="{{ route('user_info.edit', $users['id']) }}">
+                            <button type="button" class="btn btn-primary"> ユーザー情報編集</button>
+                        </a>
+                    </th>
+                    <div>
+                        <a href="{{ route('post.index') }}">
+                            <button type="button" class="btn btn-secondary mt-2">投稿一覧画面へ</button>
+                        </a>
+                    </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-center mr-5 mb-4 mt-3">
                 <div>
                     <div>
-                        <p>お気に入りのお知らせ</p>
+                        <p class="h4">お気に入りのお知らせ</p>
                     </div>
                     @foreach($favorites as $favorite)
                     <tr>
                         @if ($favorite['user_id'] == Auth::id())
                         <div class="card d-flex flex-row bd-highlight mb-3" style="width: 50rem;">
-                            <div class="card-body">
+                            <div class="">
                                 <a href="">
-                                    <img src="{{ asset('storage/adminimages/'.$favorite->news->images) }} " width="100" height="100">
+                                    <img src="{{ asset('storage/adminimages/'.$favorite['images']) }} " width="100" height="100">
                                 </a>
                             </div>
                             <div>
-                                <p class="text-dark">{{ $favorite->news->name }}</p>
-                                <p class="text-dark">{{ $favorite->news->title }}</p>
-                                <p class="text-dark">{{ $favorite->news->comment }}</p>
+                                <p class="text-dark">{{ $favorite['name'] }}</p>
+                                <p class="text-dark">{{ $favorite['title']}}</p>
+                                <p class="text-dark">{{ $favorite['comment'] }}</p>
                             </div>
                         </div>
                         @endif
@@ -66,22 +67,24 @@
                     @endforeach
                 </div>
 
-                <div>
+                <div class="ml-5 mb-4">
                     <div>
-                        <p>参加予定イベント</p>
+                        <p class="h4">参加予定イベント</p>
                     </div>
+
                     @foreach($events as $event)
                     <tr>
                         @if ($event['user_id'] == Auth::id())
                         <div class="card d-flex flex-row bd-highlight mb-3" style="width: 50rem;">
-                            <div class="card-body">
+                            <div class="">
                                 <a href="">
-                                    <img src="{{ asset('storage/adminimages/'.$event->eventnews->images) }} " width="100" height="100"> </a>
+                                    <img src="{{ asset('storage/adminimages/'.$event['images']) }} " width="100" height="100">
+                                </a>
                             </div>
                             <div>
-                                <p class="text-dark">{{ $event->eventnews->name }}</p>
-                                <p class="text-dark">{{ $event->eventnews->title }}</p>
-                                <p class="text-dark">{{ $event->eventnews->comment }}</p>
+                                <p class="text-dark">{{ $event['name'] }}</p>
+                                <p class="text-dark">{{ $event['title'] }}</p>
+                                <p class="text-dark">{{ $event['comment'] }}</p>
                             </div>
                         </div>
                         @endif

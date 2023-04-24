@@ -28,69 +28,63 @@
     </div>
 </div>
 <!-- 情報一覧 -->
-<div class="info-list">
-    <div class="list col-md-5"><!-- ユーザー一覧 -->
-        <p class="list-title">ユーザー 一覧</p>
-        <div class="user-list">
-            <div class="box2"></div>
-            <div>
-                @foreach($userinfos as $userinfo)
-                @if ($userinfo['role'] != 0)
-                <tr>
-                    <th scope="col">
-                        @if (isset($userinfo['images']))
+<div class="d-flex justify-content-center mr-5 mb-4 mt-3">
+    <div>
+        <!-- ユーザー一覧 -->
+        <div>
+            <p class="h4">ユーザー 一覧</p>
+        </div>
+        @foreach($userinfos as $userinfo)
+        @if ($userinfo['role'] != 0)
+        <tr>
+            <div class="card d-flex flex-row bd-highlight mb-3" style="width: 50rem;">
+                <div class="">
+                    @if (isset($userinfo['images']))
+                    <a href="">
                         <img src="{{ asset('storage/usersimages/'.$userinfo['images']) }} " width="100" height="100">
                         @else
                         <img src="{{ asset('defalticon.png') }}" width="100" height="100">
-                        @endif
-                    </th>
-                    <th scope="col">
-                        <p>{{ $userinfo['name'] }}</p>
-                    </th>
-                    <th scope='col'>{{ $userinfo['email'] }}</th>
-                    <th scope="col">
-                        <form action="{{ route('home.destroy', $userinfo['user_id']) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button type="submit">削除</button>
-                        </form>
-                    </th>
-                </tr>
-                <br>
-                @endif
-                @endforeach
+                        @endif </a>
+                </div>
+                <div>
+                    <p class="text-dark" style="width: 30rem;">{{ $userinfo['name'] }}</p>
+                    <p class="text-dark" style="width: 30rem;">{{ $userinfo['email'] }}</p>
+                </div>
+                <form action="{{ route('home.destroy', $userinfo['user_id']) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger">削除</button>
+                </form>
             </div>
-        </div>
+        </tr>
+        <br>
+        @endif
+        @endforeach
     </div>
-</div>
-<div class="list col-md-6">
-    <p class="list-title">投稿記事一覧</p>
-    <div class="post-list"><!-- 投稿記事一覧 -->
-        <div class="post-list-column">
-            <p href="">ユーザー名</p>
-            <div>
-                @foreach($posts as $post)
-                <tr>
-                    <th scope='col'>{{ $post['title']}}</th>
-                    <th scope='col'>{{ $post['comment']}}</th>
-                    <th scope="col">
-                        <form action="{{ route('post.destroy', $post['id']) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button type="submit">削除</button>
-                        </form>
-                    </th>
-                </tr>
-                <br>
-                @endforeach
-            </div>
-        </div>
+    <div class="ml-5 mb-4">
         <div>
-            <div class="box2"></div>
+            <p class="h4">投稿記事一覧</p>
         </div>
+        @foreach($posts as $post)
+        <tr>
+            <div class="card d-flex flex-row bd-highlight mb-3">
+                <div>
+                    <p class="text-dark" style="width: 40rem;">{{ $post['title']}}</p>
+                    <p class="text-dark" style="width: 40rem;">{{ $post['comment']}}</p>
+                </div>
+                <form action="{{ route('post.destroy', $post['id']) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger">削除</button>
+                </form>
+            </div>
+        </tr>
+        <br>
+        @endforeach
     </div>
 </div>
-</div>
+
+
 </body>
 @endsection
 

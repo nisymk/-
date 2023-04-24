@@ -5,36 +5,47 @@
     <div class="d-flex justify-content-around">
         <div>
             <ul class="list-group">
-                <div class="card" style="width: 45rem; height: 40rem;">
+                <div class="card" style="width: 55rem; height: 50rem;">
                     <div class="card-header bg-primary">
                         イベント参加申請フォーム
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-dark">お知らせタイトル　{{ $news['title'] }}</li>
-                        <li class="list-group-item text-dark">お知らせ画像　
+                        <li class="list-group-item text-dark">お知らせタイトル：　{{ $news['title'] }}</li>
+                        <li class="list-group-item text-dark">お知らせ画像：
                             <img src="{{ asset('storage/adminimages/'.$news['images']) }} " style="width: 25rem; height: 20rem;">　
                         </li>
-                        <li class="list-group-item text-dark">お知らせ詳細内容　{{ $news['comment'] }}</li>
-                        <li class="list-group-item text-dark">
-                            <a href="/">ホームへ戻る</a></li>
+                        <li class="list-group-item text-dark">お知らせ詳細内容：　{{ $news['comment'] }}</li>
                     </ul>
-        </div>
-        @if($like_model->like_exist(Auth::user()->id, $news['id']))
-        <p class="">
-            <button class="js-event-toggle event" href="" data-eventid="{{ $news['id'] }}"><i class="fas">参加やめる</i></button>
-        </p>
-        @else
-        <p class="">
-            <button class="js-event-toggle" href="" data-eventid="{{ $news['id'] }}"><i class="fas">参加をする</i></button>
-        </p>
-        @endif
+                </div>
+                <div class="bg-primary text-center d-flex justify-content-around">
+                    <div class="col-3">
+                        <a href="/" class="text-white mt-3">ホームへ戻る</a>
+                    </div>
+                    <div class="col-3">
+                        @if($like_model->like_exist(Auth::user()->id, $news['id']))
+                        <p class="">
+                            <button class="js-event-toggle event btn open" href="" data-eventid="{{ $news['id'] }}"><i class="fas"></i></button>
+                        </p>
+                        @else
+                        <p class="">
+                            <button class="js-event-toggle btn" href="" data-eventid="{{ $news['id'] }}"><i class="fas"></i></button>
+                        </p>
+                        @endif
+                    </div>
+                </div>
+        <!-- </div class="btn mx-auto d-flex align-items-center"> -->
+        <!-- ！！！ボタンを中央よせしたい -->
         </ul>
     </div>
 </div>
 </div>
 <style>
-    .event i {
-        color: red !important;
+    .btn::before {
+        content: "参加する";
+    }
+
+    .btn.open::before {
+        content: "参加をやめる";
     }
 </style>
 

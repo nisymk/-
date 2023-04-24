@@ -5,53 +5,57 @@
     {{ session('flash_message') }}
 </div>
 @endif
-<!-- 検索 -->
-<div class="form">
-    <!-- <div>
-        <button class="btn">検索</button>
-    </div> -->
-    <!-- 管理者お知らせ作成、編集 -->
-    <div>
-        <div>
-            <a href="{{ route('news.create') }}"><button class="btn btn-primary">お知らせ作成</button></a>
-        </div>
-    </div>
-</div>
 <!-- 情報一覧 -->
-<div class="info-list">
-    <div class="list col-md-5"><!-- ユーザー一覧 -->
-        <p class="list-title bg-primary">お知らせ 一覧</p>
-        <div class="user-list">
-            <div class="box2">
-                <div>
-                    <a href="/">ホーム画面へ戻る</a>
-                </div>
-                <div>
-                    @foreach($news as $new)
-                    <tr>
-                        <th scope="col">
-                            <img src="{{ asset('storage/adminimages/'.$new['images']) }} " width="100" height="100">
-                        </th>
-                        <th scope="col">
-                            <span>{{ $new['title'] }}</span>
-                        </th>
-                        <th scope='col'>{{ $new['comment'] }}</th>
-                        <th scope="col">
-                            <button>
-                                <a href="{{ route('news.edit', $new['id']) }}">
-                                    編集
-                                </a>
-                            </button>
-                        </th>
-                        <th scope="col">
-                            <form action="{{ route('news.destroy', $new['id']) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button type="submit">削除</button>
-                            </form>
-                        </th>
-                    </tr>
-                    @endforeach
+<div class="container">
+    <div class="post-list d-flex justify-content-center">
+        <!-- <nav class="navbar navbar-expand-lg bg-info"> -->
+        <div class="container justify-content-between">
+            <div class="navbar-translate">
+                <p class="list-title bg-primary h3 text-center">お知らせ 一覧</p>
+                <div class="user-list">
+                    <div class="box2">
+                        <div class="text-center"><!-- 検索 -->
+                            <div class="form">
+                                <!-- <div>
+                                    <button class="btn">検索</button>
+                                </div> -->
+                                <!-- 管理者お知らせ作成、編集 -->
+                                        <a href="{{ route('news.create') }}"><button class="btn btn-primary">お知らせ作成</button></a>
+                            <a href="/" class="bg-primary h3">ホーム画面へ戻る</a>
+                        </div>
+                        <div class="post-list-column">
+                            <div>
+                                @foreach($news as $new)
+                                <div class="card d-flex flex-row bd-highlight mt-3 mb-3 center-block" style="width: 70rem;">
+                                    <div class="mr-5 mt-3">
+                                        <img src="{{ asset('storage/adminimages/'.$new['images']) }} " width="100" height="100">
+                                    </div>
+                                    <div class="ml-5">
+                                        <p class="text-dark mt-3" style="width: 40rem;">投稿タイトル：{{ $new['title'] }}</p>
+                                        <p class="text-dark" >投稿内容： {{ $new['comment'] }}</p>
+                                    </div>
+                                    <div class="container">
+                                        <div class="mt-3">
+                                            <div class="col-2">
+                                                <a href="{{ route('news.edit', $new['id']) }}">
+                                                    <button type="" class="btn btn-primary">編集</button>
+                                                </a>
+                                            </div>
+                                            <div class="col-2 mt-3">
+                                                <form action="{{ route('news.destroy', $new['id']) }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="btn btn-danger">削除</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </br>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

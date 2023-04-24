@@ -8,7 +8,7 @@
             <div class="card" style="width: 80rem; height: 60rem;">
 
                 <div class="card-header text-dark text-center">
-                    管理者アイコン編集画面
+                    管理者情報編集画面
                 </div>
                 <ul class="list-group list-group-flush">
                     <div class="input-form">
@@ -30,12 +30,12 @@
                     <li class="list-group-item">
                         <div class="input-form text-center">
                             <label for="name" class="text-dark">管理者名</label>
-                            <input name="name" value="{{ old('name', Auth::user()->name) }}" placeholder="AdminName" class="text-dark d-block mx-auto">
+                            <input name="name" value="{{ old('name', Auth::user()->name) }}" placeholder="AdminName" class="text-dark d-block mx-auto" required>
                         </div>
                     </li>
                     <li class="list-group-item">
                         <div class="input-form">
-                            <input type="submit" class="btn btn-primary d-block mx-auto" value="アイコン画像編集">
+                            <input type="submit" class="btn btn-primary d-block mx-auto" value="情報を変更する">
                         </div>
                     </li>
                     <li class="list-group-item text-center">

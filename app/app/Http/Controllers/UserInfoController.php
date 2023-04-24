@@ -26,8 +26,9 @@ class UserInfoController extends Controller
         $userinfo = UserInfo::all();
         $users = Auth::user();
         $loginuserinfo = $users->userinfo;
-        $events = Event::all();
-        $favorites = Favorite::all();
+        $events = News::join('event', 'news.id', 'news_id')->where('event.user_id', $users->id)->get();
+        $favorites = News::join('favorite', 'news.id', 'news_id')->where('favorite.user_id', $users->id)->get();
+        // dd($favorites);
         if (Auth::user()->role === 1) {
             return view('users/loginUsersIndex', [
                 'news' => $news,
@@ -88,12 +89,14 @@ class UserInfoController extends Controller
     {
         $user = User::find($id);
         $news = News::all();
-        $events = Event::all();
-        
+        $events = News::join('event', 'news.id', 'news_id')->where('event.user_id', $id)->get();
+        // $events = Event::all();
+        // dd($events);
         return view('users/userDetail', [
             'user' => $user,
             'news' => $news,
             'events' => $events,
+            'id' => $id,
         ]);
     }
 
@@ -120,64 +123,96 @@ class UserInfoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validatedData = $request->validate([
-           'name' => 'required|max:100',
-           'prefecture' => 'required|max:50',
-        ]);
-        $info = UserInfo::find($id);
-        $userinfo = UserInfo::where('user_id', Auth::id())->first();
+        // dd($request);
+        // $validatedData = $request->validate([
+        //    'name' => 'required|max:100',
+        //    'age' => 'max:11',
+        //    'prefecture' => 'required|max:50',
+        //    'sports' => 'max:255',
+        //    'comment' => 'max:255',
+        // ]);
+
+        // dd($user);
+        // $userinfo = UserInfo::where('user_id', Auth::id())->first();
+        // $user_info = new UserInfo;
+        // $userinfo = $user_info->join('users', 'user_info.user_id', 'users.id')->where('user_id', Auth::id())->first();
+        // dd($userinfo);
+        // if ($userinfo == null) {
+        //     // dd($request);
+        //     // アップロードされたファイル名を取得
+        //     if ($request->file('images') != null) {
+        //         $file_name = $request->file('images')->getClientOriginalName();
+        //         $request->file('images')->storeAs('public/usersimages', $file_name);
+        //         $user_info->images = $file_name;
+        //     }
+        //     // 取得したファイル名で保存
+        //     // 変数　＝　代入したい値　ブレードのname属性を持ってきている
+        //     $user->name= $request->name;
+        //     $user_info->age = $request->age;
+        //     $user_info->prefecture = $request->prefecture;
+        //     $user_info->sports = $request->sports;
+        //     $user_info->comment = $request->comment;
+        //     // Auth::id() でログインしているユーザー（idのみ可能）
+        //     $user_info->user_id = Auth::id();
+
+        //     $user->save();
+        //     $user_info->save();
+
+        //     return redirect('/user_info');
+        // } else {
+        // dd($request);
+        // アップロードされたファイル名を取得
+        $userinfo = UserInfo::where('user_id', $id)->first();
         if ($userinfo == null) {
             $userinfo = new UserInfo;
-            // アップロードされたファイル名を取得
-            if ($request->file('images') !== null) {
-                $file_name = $request->file('images')->getClientOriginalName();
-                $request->file('images')->storeAs('public/usersimages', $file_name);
-                $userinfo->images = $file_name;
-            }
-            // 取得したファイル名で保存
-            // 変数　＝　代入したい値　ブレードのname属性を持ってきている
-            $userinfo->prefecture= $request->prefecture;
-            $userinfo->sports = $request->sports;
-            $userinfo->comment = $request->comment;
-            // Auth::id() でログインしているユーザー（idのみ可能）
-            $userinfo->user_id = Auth::id();
+        }
+        $user = User::find($id);
 
-            $userinfo->save();
-
-            return redirect('/user_info');
-        } else {
-            // アップロードされたファイル名を取得
-            if($request->file('images') !== null) {
+            if($request->file('images') != null) {
                 $file_name = $request->file('images')->getClientOriginalName();
     
                 if (Auth::user()->role === 1) {
+                    $file_name = $request->file('images')->getClientOriginalName();
                     $request->file('images')->storeAs('public/usersimages', $file_name);
+                    $userinfo->images = $file_name;
                 } else {
+                    $file_name = $request->file('images')->getClientOriginalName();
                     $request->file('images')->storeAs('public/adminimages', $file_name);
+                    $userinfo->images = $file_name;
                 }
                 $userinfo->images = $file_name;
-                $userinfo->save();
             }
-    
+            // dd($userinfo);
             // 変数　＝　代入したい.値　ブレードのname属性を持ってきている
-            $user = Auth::user();
             $user->name = $request->name;
+            $userinfo->age = $request->age;
+            $userinfo->prefecture = $request->prefecture;
+            $userinfo->sports = $request->sports;
+            $userinfo->comment = $request->comment;
+
+            $userinfo->user_id = Auth::id();
+
             $user->save();
-    
-            if (!empty($request->prefecture)){
-                $userinfo->prefecture = $request->prefecture;
-            }
-            if (!empty($request->sports)) {
-                $userinfo->sports = $request->sports;
-            }
-            if (!empty($request->comment)){
-                $userinfo->comment = $request->comment;
-            }
-            if (!empty($request->sports) || !empty($request->prefecture) || !empty($request->comment)) {
-                $userinfo->save();
-            }
+            $userinfo->save();
+
             return redirect('/user_info');
-        }
+            // if (!empty($request->prefecture)){
+            //     $userinfo->prefecture = $request->prefecture;
+            // }
+            // if (!empty($request->age)){
+            //     $userinfo->age = $request->age;
+            // }
+            // if (!empty($request->sports)) {
+            //     $userinfo->sports = $request->sports;
+            // }
+            // if (!empty($request->comment)){
+            //     $userinfo->comment = $request->comment;
+            // }
+            // if (!empty($request->sports) || !empty($request->prefecture) || !empty($request->comment)) {
+            //     $userinfo->save();
+            // }
+          
+        // }
 
     }
 

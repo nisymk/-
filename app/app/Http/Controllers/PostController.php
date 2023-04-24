@@ -22,10 +22,8 @@ class PostController extends Controller
         $search = $request->input('search');
         // $user_info = Post::query()->join('user_info', 'users.id', 'user_info.user_id');
         $user_infos = UserInfo::where('user_id', Auth::id())->get();
-        $query = User::query()->join('post', 'users.id', 'post.user_id');
-        // dd($query);
+        $query = User::query()->join('post', 'users.id', 'post.user_id')->orderBy('post.updated_at', 'desc');
         if ($search) {
-
             $spaceConversion = mb_convert_kana($search, 's');
 
             $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
@@ -160,6 +158,10 @@ class PostController extends Controller
     {
         // where('id', $id) == find($id)
         POST::find($id)->delete();
-        return redirect('/post');
+        if (Auth::user()->role === 1) {
+            return redirect('/post');
+        } else {
+            return redirect('/');
+        }
     }
 }

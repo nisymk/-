@@ -19,7 +19,7 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $news = News::all();
+        $news = News::orderBy('updated_at', 'desc')->get();
         // dd($posts);
         // return view('users/userHome');
         return view('admin/newsIndex', [
