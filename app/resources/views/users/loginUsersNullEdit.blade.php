@@ -128,7 +128,7 @@
                 @endif
             </div>
             <div class="form">
-                <form action="{{ route('user_info.update', Auth::id()) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('user_info.update', Auth::id()) }}" method="POST" enctype="multipart/form-data" style="height: 80rem;">
                     @csrf
                     @method('PUT')
                     <div class="create-items">
@@ -176,11 +176,11 @@
                                             <textarea class="form-control" id="exampleFormControlTextarea1" class="text-dark" name="comment" id="comment" placeholder="自己紹介">{{ old('comment', $user_info ? $user_info['comment']: '') }}</textarea>
                                         </div>
                                     </li>
+                                    <li class="input-form text-dark list-group-item">
+                                        <input type="submit" value="保存">
+                                        <!-- <a href="/">ホームへ戻る</a> -->
+                                    </li>
                                 </ul>
-                                <div class="input-form text-dark">
-                                    <input type="submit" value="保存">
-                                    <!-- <a href="/">ホームへ戻る</a> -->
-                                </div>
                             </div>
                         </div>
                     </div>

@@ -18,7 +18,7 @@
             @method('PUT')
             <div class="create-items form-group">
                 <div class="d-flex justify-content-around">
-                    <div class="card" style="width: 45rem; height: 10rem;">
+                    <div class="card" style="width: 45rem; height: 80rem;">
                         <div class="card-header bg-primary">
                             ユーザー情報編集フォーム
                         </div>
