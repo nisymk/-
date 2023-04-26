@@ -149,6 +149,11 @@ return [
         'title' => 'タイトル',
         'comment' => '投稿内容',
         'images' => '画像',
+        'age' => '年齢',
+        'p' => '年齢',
+        'prefecture' => '出身県',
+        'sports' => 'スポーツ',
+        'comment' => '内容',
     ],
 
 ];

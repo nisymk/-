@@ -76,13 +76,13 @@
                                 <i class="material-icons">settings</i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <h6 class="dropdown-header">Dropdown header</h6>
+                                <h6 class="dropdown-header">設定</h6>
                                     <div>
                                         @if(Auth::check())
                                         <!-- <span class="my-navbar-item">{{ Auth::user()->name }}</span> -->
                                         <a href="#" id="logout" class="dropdown-item">ログアウト</a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
+                                        @csrf
                                         </form>
                                         <script>
                                             document.getElementById('logout').addEventListener('click', function(event) {
@@ -94,7 +94,7 @@
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
-                                                {{ __('Logout') }}
+                                                {{ __('ログアウト') }}
                                             </a>
 
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -102,12 +102,6 @@
                                             </form>
                                         </div>
                                     </div>
-                                <a href="#pablo" class="dropdown-item">Another action</a>
-                                <a href="#pablo" class="dropdown-item">Something else here</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#pablo" class="dropdown-item">Separated link</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#pablo" class="dropdown-item">One more separated link</a>
                             </div>
                         </li>
                     </ul>

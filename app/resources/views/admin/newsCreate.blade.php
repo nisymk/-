@@ -19,13 +19,13 @@
                 <div class="d-flex justify-content-around">
                     <div class="card" style="width: 45rem; height: 40rem;">
                         <div class="card-header bg-primary text-center">
-                            投稿フォーム
+                            お知らせ投稿フォーム
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <div class="input-form">
                                     <label for="title"></label>
-                                    <input name="title" id="title" class="form-control text-center" placeholder="タイトル" value="{{ old('title') }}">
+                                    <input name="title" id="title" class="form-control text-center" placeholder="お知らせイトル" value="{{ old('title') }}">
                                 </div>
                             </li>
                             <li class="list-group-item">
@@ -39,7 +39,7 @@
                             <li class="list-group-item">
                                 <div class=" form-group">
                                     <label for="comment"></label>
-                                    <textarea name="comment" id="comment" class="form-control text-center" placeholder="投稿内容">{{ old('comment') }}</textarea>
+                                    <textarea name="comment" id="comment" class="form-control text-center" placeholder="お知らせ内容">{{ old('comment') }}</textarea>
                                 </div>
                             </li>
                             <li class="list-group-item">

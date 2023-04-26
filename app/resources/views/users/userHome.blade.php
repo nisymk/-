@@ -11,12 +11,12 @@
         <div class="text-right">
             <button type="button" class="btn btn-primary">
                 <a href="{{ route('post.create') }}" class="text-white">
-                    投稿作成
+                    つぶやき作成
                 </a>
             </button>
             <button type="button" class="btn btn-primary">
                 <a href="{{ route('post.index') }}" class="text-white">
-                    投稿一覧画面へ
+                    つぶやき一覧画面へ
                 </a>
             </button>
         </div>
@@ -47,9 +47,10 @@
                                 <div class="card-title w-50 m-2 bg-primary">
                                     <a href="{{ route('news.show', $new['id']) }}" class="text-white">{{ $new['title'] }}</a>
                                 </div>
-                                <div class="text-left" style="height: 150px;">
-                                    <span class="card-text" style="width: 300px;">{{ $new['comment'] }}</span>
-                                </div> @if($like_model->like_exist(Auth::user()->id,$new->id))
+                                <div class="text-left text-overflow-lines" style="height: 150px;">
+                                    <span class="card-text text-dark" style="width: 300px;">{{ $new['comment'] }}</span>
+                                </div>
+                                @if($like_model->like_exist(Auth::user()->id,$new->id))
                                 <p class="favorite-marke" style="padding: 30px;">
                                     <button class="js-like-toggle loved btn-lg" href="" data-newsid="{{ $new->id }}"><i class="fas fa-heart"></i></button>
                                 </p>
@@ -79,59 +80,3 @@
 @endsection
 
 </html>
-
-<!--  carousel  -->
-<!-- <div class="section" id="carousel">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 mr-auto ml-auto"> -->
-<!-- Carousel Card -->
-<!-- <div class="card card-raised card-carousel">
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="3000">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100" src="./assets/img/bg2.jpg" alt="First slide">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h4>
-                                        <i class="material-icons">location_on</i> Yellowstone National Park, United States
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="./assets/img/bg3.jpg" alt="Second slide">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h4>
-                                        <i class="material-icons">location_on</i> Somewhere Beyond, United States
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="./assets/img/bg.jpg" alt="Third slide">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h4>
-                                        <i class="material-icons">location_on</i> Yellowstone National Park, United States
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <i class="material-icons">keyboard_arrow_left</i>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <i class="material-icons">keyboard_arrow_right</i>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div> -->
-<!-- End Carousel Card -->
-<!-- </div>
-        </div>
-    </div>
-</div> -->
-<!--         end carousel -->

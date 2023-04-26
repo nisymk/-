@@ -19,13 +19,13 @@
                 <div class="d-flex justify-content-around">
                     <div class="card" style="width: 45rem; height: 40rem;">
                         <div class="card-header bg-primary">
-                            投稿フォーム
+                            つぶやき投稿フォーム
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <div class="input-form">
                                     <label for="title"></label>
-                                    <input name="title" id="title" class="form-control" placeholder="タイトル">
+                                    <input name="title" id="title" class="form-control" placeholder="つぶやきタイトル">
                                 </div>
                             </li>
                             <li class="list-group-item">
@@ -39,7 +39,7 @@
                             <li class="list-group-item">
                                 <div class=" form-group">
                                     <label for="comment"></label>
-                                    <textarea name="comment" id="comment" class="form-control" placeholder="投稿内容"></textarea>
+                                    <textarea name="comment" id="comment" class="form-control" placeholder="つぶやき内容"></textarea>
                                 </div>
                             </li>
                             <li class="list-group-item">

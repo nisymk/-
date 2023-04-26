@@ -2,17 +2,12 @@
 @section('content')
 
 <div class="list">
-    <!-- <p class="list-title"></p> -->
-    <div class="post-list"><!-- 投稿記事一覧 -->
+    <div class="post-list">
+        <!-- 投稿記事一覧 -->
         <div class="post-list-column">
             <form method="GET" action="{{ route('post.index') }}">
                 @csrf
-                <!-- <input type="search" placeholder="" name="search" value="@if (isset($search)) {{ $search }} @endif">
-                <div>
-                    <button type="submit">検索</button>
-                </div> -->
             </form>
-            <!--  -->
             <div class="d-flex justify-content-center">
                 <div class="mr-2 card" style="height: 152px;">
                     @if($loginuser_info != null && $loginuser_info->images != null)

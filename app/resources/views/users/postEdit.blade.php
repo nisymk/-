@@ -13,34 +13,6 @@
             </div>
             @endif
         </div>
-        <!-- <form action="{{ route('post.update', $post['id']) }}" method="POST" enctype="multipart/form-data"> -->
-        <!-- @csrf -->
-        <!-- @method('PUT') -->
-        <!-- <div class="input-form"> -->
-        <!-- <label for="title">タイトル</label>
-        <input name="title" value="{{ old('title', $post['title']) }}"> -->
-        <!-- </div> -->
-        <!-- <div> -->
-        <!-- <img src="{{ asset('storage/usersimages/'.$post['images']) }} " width="100" height="100"> -->
-        <!-- @if($post != null && $post->images != null)
-            <img src="{{ asset('storage/usersimages/'.$post['images']) }} " width="100" height="100">
-            @else
-            <img src="{{ asset('defobado.png') }} " width="100" height="100">
-            @endif
-        </div> -->
-        <!-- <div class="input-form">
-            <label for="images">画像</label>
-            <input type="file" name="images">
-        </div> -->
-        <!-- <div class=" input-form"> -->
-        <!-- <label for="comment">投稿内容</label>
-        <textarea name="comment" id="comment">{{ old('comment', $post['comment']) }}</textarea> -->
-        <!-- </div> -->
-        <!-- <div class="input-form">
-            <input type="submit" value="Submit">
-        </div>
-        </form> -->
-
         <form action="{{ route('post.update', $post['id']) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -53,13 +25,12 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <div class="input-form">
-                                    <label for="title">タイトル</label>
-                                    <input name="title" id="title" class="form-control" placeholder="タイトル" value="{{ old('title', $post['title']) }}">
+                                    <label for="title">つぶやきタイトル</label>
+                                    <input name="title" id="title" class="form-control" placeholder="つぶやきタイトル" value="{{ old('title', $post['title']) }}">
                                 </div>
                             </li>
                             <li class="list-group-item">
                                 <div class="d-block mx-auto">
-                                    <!-- <img src="{{ asset('storage/usersimages/'.$post['images']) }} " width="100" height="100"> -->
                                     @if($post != null && $post->images != null)
                                     <img src="{{ asset('storage/usersimages/'.$post['images']) }}" class="d-block mx-auto" width="400" height="250">
                                     @else
@@ -75,8 +46,8 @@
                             </li>
                             <li class="list-group-item">
                                 <div class="form-group">
-                                    <label for="comment"></label>
-                                    <textarea name="comment" id="comment" class="form-control" placeholder="投稿内容">{{ old('comment', $post['comment']) }}</textarea>
+                                    <label for="comment">つぶやき内容</label>
+                                    <textarea name="comment" id="comment" class="form-control" placeholder="つぶやき内容">{{ old('comment', $post['comment']) }}</textarea>
                                 </div>
                             </li>
                             <li class="list-group-item">

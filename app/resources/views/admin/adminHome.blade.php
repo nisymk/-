@@ -3,10 +3,10 @@
 
 <!-- 検索 -->
 <div class="form">
-    <!-- <div>
+    <div>
         <button class="btn">検索</button>
     </div>
-    <form method="GET" action="{{ route('post.index') }}" class="form-inline ml-auto">
+ <form method="GET" action="{{ route('post.index') }}" class="form-inline ml-auto d-flex justify-content-center h3">
         @csrf
         <div class="form-group has-white bmd-form-group">
             <input type="search" placeholder="Search" name="search" class="form-control" value="@if (isset($search)) {{ $search }} @endif">
@@ -16,7 +16,7 @@
                 <i class="material-icons">search</i>
             </button>
         </div>
-    </form> -->
+    </form>
     <!-- 管理者お知らせ作成、編集 -->
     <div>
         <div>

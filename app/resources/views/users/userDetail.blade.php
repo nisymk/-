@@ -33,8 +33,8 @@
                     </a>
                 </div>
                 <div>
-                    <p class="text-dark">お知らせタイトル：{{ $event->title }}</p>
-                    <p class="text-dark">お知らせ内容： {{ $event->comment }}</p>
+                    <p class="text-dark">お知らせイベントタイトル：{{ $event->title }}</p>
+                    <p class="text-dark">お知らせイベント内容： {{ $event->comment }}</p>
                 </div>
             </div>
             <br>

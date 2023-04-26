@@ -26,7 +26,7 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <div class="input-form">
-                                    <label for="title"><span class="badge bg-primary d-block">タイトル</span></label>
+                                    <label for="title"><span class="badge bg-primary d-block">お知らせタイトル</span></label>
                                     <input name="title" id="title" class="form-control" placeholder="タイトル" value="{{ old('title', $news['title']) }}">
                                 </div>
                             </li>

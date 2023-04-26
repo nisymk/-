@@ -21,28 +21,62 @@ class PostController extends Controller
      
         $search = $request->input('search');
         // $user_info = Post::query()->join('user_info', 'users.id', 'user_info.user_id');
+        $users = new User;
         $user_infos = UserInfo::where('user_id', Auth::id())->get();
-        $query = User::query()->join('post', 'users.id', 'post.user_id')->orderBy('post.updated_at', 'desc');
-        if ($search) {
-            $spaceConversion = mb_convert_kana($search, 's');
+        if (Auth::user()->role === 1) {
+            $query = User::query()->join('post', 'users.id', 'post.user_id')->orderBy('post.updated_at', 'desc');
+            if ($search) {
+                $spaceConversion = mb_convert_kana($search, 's');
 
-            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
-            
-            foreach($wordArraySearched as $value) {
-                $query = $query->where('name', 'like', '%'.$value.'%')
-                ->orWhere('comment', 'like', '%'.$value.'%')
-                ->orWhere('title', 'like', '%' . $value . '%');
+                $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+
+                foreach ($wordArraySearched as $value) {
+                    $query = $query->where('name', 'like', '%' . $value . '%')
+                        ->orWhere('comment', 'like', '%' . $value . '%')
+                        ->orWhere('title', 'like', '%' . $value . '%');
+                }
+                $posts = $query->get();
+            } else {
+                $posts = $query->get();
             }
-            $posts = $query->get();
-
+            return view('users/postIndex', [
+                    'posts' => $posts,
+                    'search' => $search,
+                    'user_infos' => $user_infos,
+                ]);
         } else {
-            $posts = $query->get();
-        }
-        return view('users/postIndex', [
+            // $userinfos = $users->join('user_info', 'users.id', 'user_id')->get();
+            $query = User::query()->join('post', 'users.id', 'post.user_id')->orderBy('post.updated_at', 'desc');
+            $queryUsers = User::query()->join('user_info', 'users.id', 'user_id')->orderBy('user_info.updated_at', 'desc');
+            if ($search) {
+                $spaceConversion = mb_convert_kana($search, 's');
+                
+                $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+                
+                foreach ($wordArraySearched as $value) {
+                    $queryUsers = $queryUsers->where('name', 'like', '%' . $value . '%')
+                        ->orWhere('email', 'like', '%' . $value . '%')
+                        ->orWhere('comment', 'like', '%' . $value . '%');
+                    $query = $query->where('name', 'like', '%' . $value . '%')
+                    ->orWhere('comment', 'like', '%' . $value . '%')
+                    ->orWhere('title', 'like', '%' . $value . '%');
+                }
+
+                $posts = $query->get();
+                $userinfos = $queryUsers->get();
+            } else {
+                // dd($query);
+                $posts = $query->get();
+                $userinfos = $queryUsers->get();
+            }
+            // dd($posts);
+            return view('admin/adminHome', [
                 'posts' => $posts,
                 'search' => $search,
-                'user_infos' => $user_infos,
+                'userinfos' => $userinfos,
+                // 'user_infos' => $user_infos,
             ]);
+        }
     }
 
     /**

@@ -124,44 +124,14 @@ class UserInfoController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request);
-        // $validatedData = $request->validate([
-        //    'name' => 'required|max:100',
-        //    'age' => 'max:11',
-        //    'prefecture' => 'required|max:50',
-        //    'sports' => 'max:255',
-        //    'comment' => 'max:255',
-        // ]);
+        $validatedData = $request->validate([
+           'name' => 'required|max:100',
+           'age' => 'max:150',
+           'prefecture' => 'max:50',
+           'sports' => 'max:255',
+           'comment' => 'max:255',
+        ]);
 
-        // dd($user);
-        // $userinfo = UserInfo::where('user_id', Auth::id())->first();
-        // $user_info = new UserInfo;
-        // $userinfo = $user_info->join('users', 'user_info.user_id', 'users.id')->where('user_id', Auth::id())->first();
-        // dd($userinfo);
-        // if ($userinfo == null) {
-        //     // dd($request);
-        //     // アップロードされたファイル名を取得
-        //     if ($request->file('images') != null) {
-        //         $file_name = $request->file('images')->getClientOriginalName();
-        //         $request->file('images')->storeAs('public/usersimages', $file_name);
-        //         $user_info->images = $file_name;
-        //     }
-        //     // 取得したファイル名で保存
-        //     // 変数　＝　代入したい値　ブレードのname属性を持ってきている
-        //     $user->name= $request->name;
-        //     $user_info->age = $request->age;
-        //     $user_info->prefecture = $request->prefecture;
-        //     $user_info->sports = $request->sports;
-        //     $user_info->comment = $request->comment;
-        //     // Auth::id() でログインしているユーザー（idのみ可能）
-        //     $user_info->user_id = Auth::id();
-
-        //     $user->save();
-        //     $user_info->save();
-
-        //     return redirect('/user_info');
-        // } else {
-        // dd($request);
-        // アップロードされたファイル名を取得
         $userinfo = UserInfo::where('user_id', $id)->first();
         if ($userinfo == null) {
             $userinfo = new UserInfo;
