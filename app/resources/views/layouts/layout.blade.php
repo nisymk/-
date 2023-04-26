@@ -47,7 +47,6 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
 
     <div>
-        <!--  -->
         <nav class="navbar navbar-expand-lg bg-info">
             <div class="container">
                 <div class="navbar-translate">
@@ -79,7 +78,6 @@
                                 <h6 class="dropdown-header">設定</h6>
                                     <div>
                                         @if(Auth::check())
-                                        <!-- <span class="my-navbar-item">{{ Auth::user()->name }}</span> -->
                                         <a href="#" id="logout" class="dropdown-item">ログアウト</a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

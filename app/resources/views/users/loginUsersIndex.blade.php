@@ -3,7 +3,6 @@
 
 <div class="list">
     <div class="post-list">
-        <!-- 投稿記事一覧 -->
         <div class="post-list-column">
             <form method="GET" action="{{ route('post.index') }}">
                 @csrf
@@ -53,7 +52,7 @@
                             <div>
                                 <p class="text-dark">{{ $favorite['name'] }}</p>
                                 <p class="text-dark">{{ $favorite['title']}}</p>
-                                <p class="text-dark">{{ $favorite['comment'] }}</p>
+                                <p class="text-dark d-block text-truncate" style="max-width:420px;">{{ $favorite['comment'] }}</p>
                             </div>
                         </div>
                         @endif
@@ -62,7 +61,7 @@
                     @endforeach
                 </div>
 
-                <div class="ml-5 mb-4">
+                <div class=" ml-5 mb-4">
                     <div>
                         <p class="h4">参加予定イベント</p>
                     </div>
@@ -79,7 +78,7 @@
                             <div>
                                 <p class="text-dark">{{ $event['name'] }}</p>
                                 <p class="text-dark">{{ $event['title'] }}</p>
-                                <p class="text-dark">{{ $event['comment'] }}</p>
+                                <p class="text-dark d-block text-truncate" style="max-width:420px;">{{ $event['comment'] }}</p>
                             </div>
                         </div>
                         @endif

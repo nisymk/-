@@ -20,7 +20,6 @@ class PostController extends Controller
     {
      
         $search = $request->input('search');
-        // $user_info = Post::query()->join('user_info', 'users.id', 'user_info.user_id');
         $users = new User;
         $user_infos = UserInfo::where('user_id', Auth::id())->get();
         if (Auth::user()->role === 1) {
@@ -45,7 +44,6 @@ class PostController extends Controller
                     'user_infos' => $user_infos,
                 ]);
         } else {
-            // $userinfos = $users->join('user_info', 'users.id', 'user_id')->get();
             $query = User::query()->join('post', 'users.id', 'post.user_id')->orderBy('post.updated_at', 'desc');
             $queryUsers = User::query()->join('user_info', 'users.id', 'user_id')->orderBy('user_info.updated_at', 'desc');
             if ($search) {
@@ -65,16 +63,13 @@ class PostController extends Controller
                 $posts = $query->get();
                 $userinfos = $queryUsers->get();
             } else {
-                // dd($query);
                 $posts = $query->get();
                 $userinfos = $queryUsers->get();
             }
-            // dd($posts);
             return view('admin/adminHome', [
                 'posts' => $posts,
                 'search' => $search,
                 'userinfos' => $userinfos,
-                // 'user_infos' => $user_infos,
             ]);
         }
     }
@@ -102,17 +97,13 @@ class PostController extends Controller
             'comment' => 'required|max:500',
         ]);
         $post = new Post;
-        // アップロードされたファイル名を取得
         if ($request->file('images') !== null) {
             $file_name = $request->file('images')->getClientOriginalName();
             $request->file('images')->storeAs('public/usersimages', $file_name);
             $post->images = $file_name;
         }
-        // 取得したファイル名で保存
-        // 変数　＝　代入したい値　ブレードのname属性を持ってきている
         $post->title = $request->title;
         $post->comment = $request->comment;
-        // Auth::id() でログインしているユーザー（idのみ可能）
         $post->user_id = Auth::id();
     
         $post->save();
@@ -140,7 +131,6 @@ class PostController extends Controller
     public function edit($id)
     {
         $posts = Post::findOrFail($id);
-        // dd($news);
         return view('users/postEdit', ['post' => $posts]);
 
     }
@@ -167,18 +157,11 @@ class PostController extends Controller
             $post->images = $file_name;
         }
 
-        // 変数　＝　代入したい値　ブレードのname属性を持ってきている
         $post->title = $request->title;
         $post->comment = $request->comment;
 
         $post->save();
 
-        // $colums = ['title', 'images', 'comment'];
-
-        // foreach ($colums as $column) {
-        //     $edits->$column = $request->$column;
-        // }
-        // $edits->save();
         return redirect('/post');
     }
 

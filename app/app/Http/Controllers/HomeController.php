@@ -20,10 +20,8 @@ class HomeController extends Controller
      */
     public function index()//一覧表示（全部のデータを表示したい時）
     {
-        //  （TODO）ユーザー画面にNewsを表示する
         if (Auth::user()->role === 1) {
             $userinfos = UserInfo::where('user_id', Auth::id())->first();
-            // dd($userinfos);
             if ($userinfos != null) {
                 $news = News::all();
                 $like_model = new Favorite;
@@ -45,7 +43,6 @@ class HomeController extends Controller
                 'posts' => $posts,
                 'users' => $users,
                 'userinfos' => $userinfos,
-                // dd($posts),
             ]);
         }
     }

@@ -25,7 +25,6 @@
                                 <input type="file" style="display:none" name="images" id="images" class="form-control">
                             </span>
                         </div>
-                        <!-- <input type="file" name="images" id="images"> -->
                     </div>
                     <li class="list-group-item">
                         <div class="input-form text-center">

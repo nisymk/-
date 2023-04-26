@@ -8,17 +8,13 @@
 <!-- 情報一覧 -->
 <div class="container">
     <div class="post-list d-flex justify-content-center">
-        <!-- <nav class="navbar navbar-expand-lg bg-info"> -->
         <div class="container justify-content-between">
             <div class="navbar-translate">
                 <p class="list-title bg-primary h3 text-center">お知らせ 一覧</p>
                 <div class="user-list">
                     <div class="box2">
-                        <div class="text-center"><!-- 検索 -->
+                        <div class="text-center">
                             <div class="form">
-                                <!-- <div>
-                                    <button class="btn">検索</button>
-                                </div> -->
                                 <!-- 管理者お知らせ作成、編集 -->
                                 <a href="{{ route('news.create') }}"><button class="btn btn-primary">お知らせ作成</button></a>
                                 <a href="/" class="bg-primary h3">ホーム画面へ戻る</a>
@@ -34,7 +30,7 @@
                                             <div class="text-dark mt-3" style="width: 40rem;">
                                                 <p class="text-dark">お知らせタイトル：{{ $new['title'] }}</p>
                                             </div>
-                                            <p class=" text-dark d-block text-truncate" style="max-width:420px;">お知らせ内容： {{ $new['comment'] }}</p>
+                                            <p class="text-dark d-block text-truncate" style="max-width:420px;">お知らせ内容： {{ $new['comment'] }}</p>
                                             </div>
                                             <div class="container">
                                                 <div class="mt-3">

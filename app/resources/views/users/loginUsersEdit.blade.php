@@ -71,7 +71,6 @@
                             <li class="list-group-item text-center">
                                 <div class="input-form">
                                     <input type="submit" class="btn btn-primary mb-4" value=" 保存">
-                                    <!-- <a href="/">ホームへ戻る</a> -->
                                 </div>
                             </li>
                         </ul>

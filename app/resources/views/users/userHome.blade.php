@@ -3,9 +3,6 @@
 @section('content')
 <!-- 検索 -->
 <div class="form">
-    <!-- <div>
-            <button class="btn">検索</button>
-        </div> -->
     <!-- ユーザー投稿作成、編集 -->
     <div class="my-3">
         <div class="text-right">

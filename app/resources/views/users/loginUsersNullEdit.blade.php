@@ -47,7 +47,6 @@
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,200' rel='stylesheet' type='text/css'>
 
     <div>
-        <!--  -->
         <nav class="navbar navbar-expand-lg bg-info">
             <div class="container">
                 <div class="navbar-translate">
@@ -182,7 +181,6 @@
                                     </li>
                                     <li class="input-form text-dark list-group-item text-center">
                                         <input type="submit" class="btn btn-primary mb-4" value="保存">
-                                        <!-- <a href="/">ホームへ戻る</a> -->
                                     </li>
                                 </ul>
                             </div>

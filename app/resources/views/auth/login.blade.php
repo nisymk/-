@@ -25,14 +25,6 @@
                         </div>
                         <p class="description text-center">　　</p>
                         <div class="card-body">
-                            <!-- <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="material-icons">face</i>
-                                    </span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="First Name...">
-                            </div> -->
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
