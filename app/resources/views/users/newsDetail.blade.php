@@ -45,6 +45,7 @@
 
     .btn.open::before {
         content: "参加をやめる";
+        color: red !important;
     }
 </style>
 

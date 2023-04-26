@@ -104,15 +104,17 @@ class NewsController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|max:50',
             'comment' => 'required|max:500',
-            'images' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
         ]);
         $news = News::find($id);
-
-        $file_name = $request->file('images')->getClientOriginalName();
-        $request->file('images')->storeAs('public/adminimages', $file_name);
+        $images = $request->file('images');
+        
+        if (isset($images)) {
+            $file_name = $request->file('images')->getClientOriginalName();
+            $request->file('images')->storeAs('public/adminimages', $file_name);
+        }
 
         $news->title = $request->title;
-        $news->images = $file_name;
+        $news->images = $file_name ?? $news['images'];
         $news->comment = $request->comment;
 
         $news->save();

@@ -63,7 +63,7 @@
     </div>
     <div class="ml-5 mb-4">
         <div>
-            <p class="h4">投稿記事一覧</p>
+            <p class="h4">つぶやき一覧</p>
         </div>
         @foreach($posts as $post)
         <tr>

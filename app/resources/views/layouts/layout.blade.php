@@ -34,8 +34,6 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="./assets/demo/demo.css" rel="stylesheet" />
 
-
-    <title>バドミントン交流アプリ</title>
 </head>
 
 <body class="jisaku-haikei">
@@ -75,7 +73,6 @@
                                 <i class="material-icons">settings</i>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <h6 class="dropdown-header">設定</h6>
                                     <div>
                                         @if(Auth::check())
                                         <a href="#" id="logout" class="dropdown-item">ログアウト</a>
