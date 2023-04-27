@@ -6,7 +6,7 @@
     <div>
         <button class="btn">検索</button>
     </div>
- <form method="GET" action="{{ route('post.index') }}" class="form-inline ml-auto d-flex justify-content-center h3">
+    <form method="GET" action="{{ route('post.index') }}" class="form-inline ml-auto d-flex justify-content-center h3">
         @csrf
         <div class="form-group has-white bmd-form-group">
             <input type="search" placeholder="Search" name="search" class="form-control" value="@if (isset($search)) {{ $search }} @endif">
@@ -18,12 +18,10 @@
         </div>
     </form>
     <!-- 管理者お知らせ作成、編集 -->
-    <div>
+    <div class="d-flex justify-content-center">
         <div>
-            <a href="{{ route('news.create') }}"><button class="btn btn-primary">お知らせ作成</button></a>
-        </div>
-        <div>
-            <a href="{{ route('news.index') }}"><button class="btn btn-primary mt-1">お知らせ一覧画面へ</button></a>
+            <a href="{{ route('news.create') }}"><button class="btn btn-primary mr-2">お知らせ作成</button></a>
+            <a href="{{ route('news.index') }}"><button class="btn btn-primary">お知らせ一覧画面へ</button></a>
         </div>
     </div>
 </div>
@@ -38,7 +36,7 @@
         @if ($userinfo['role'] != 0)
         <tr>
             <div class="card d-flex flex-row bd-highlight mb-3" style="width: 50rem;">
-                <div class="">
+                <div class="mr-3">
                     @if (isset($userinfo['images']))
                     <a href="">
                         <img src="{{ asset('storage/usersimages/'.$userinfo['images']) }} " width="100" height="100">

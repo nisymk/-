@@ -16,8 +16,8 @@
                         <div class="text-center">
                             <div class="form">
                                 <!-- 管理者お知らせ作成、編集 -->
-                                <a href="{{ route('news.create') }}"><button class="btn btn-primary">お知らせ作成</button></a>
-                                <a href="/" class="bg-primary h3">ホーム画面へ戻る</a>
+                                <a href="{{ route('news.create') }}"><button class="btn btn-primary mr-3">お知らせ作成</button></a>
+                                <a href="/" class="btn btn-primary">ホーム画面へ戻る</a>
                             </div>
                             <div class="post-list-column">
                                 <div>
@@ -31,27 +31,26 @@
                                                 <p class="text-dark">お知らせタイトル：{{ $new['title'] }}</p>
                                             </div>
                                             <p class="text-dark d-block text-truncate" style="max-width:420px;">お知らせ内容： {{ $new['comment'] }}</p>
-                                            </div>
-                                            <div class="container">
-                                                <div class="mt-3">
-                                                    <div class="col-2">
-                                                        <a href="{{ route('news.edit', $new['id']) }}">
-                                                            <button type="" class="btn btn-primary">編集</button>
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-2 mt-3">
-                                                        <form action="{{ route('news.destroy', $new['id']) }}" method="post">
-                                                            @csrf
-                                                            @method('delete')
-                                                            <button type="submit" class="btn btn-danger">削除</button>
-                                                        </form>
-                                                    </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="mt-3">
+                                                <div class="col-2">
+                                                    <a href="{{ route('news.edit', $new['id']) }}">
+                                                        <button type="" class="btn btn-primary">編集</button>
+                                                    </a>
+                                                </div>
+                                                <div class="col-2 mt-3">
+                                                    <form action="{{ route('news.destroy', $new['id']) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button type="submit" class="btn btn-danger">削除</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
-                                        </br>
-                                        @endforeach
                                     </div>
+                                    </br>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -59,7 +58,8 @@
                 </div>
             </div>
         </div>
-        </body>
-        @endsection
+    </div>
+    </body>
+    @endsection
 
-        </html>
+    </html>

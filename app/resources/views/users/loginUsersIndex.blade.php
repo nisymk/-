@@ -10,9 +10,9 @@
             <div class="d-flex justify-content-center">
                 <div class="mr-2 card" style="height: 152px;">
                     @if($loginuser_info != null && $loginuser_info->images != null)
-                    <img src="{{ asset('storage/usersimages/'.$loginuser_info['images']) }}" width="100" height="100">
+                    <img src="{{ asset('storage/usersimages/'.$loginuser_info['images']) }}" width="150" height="150">
                     @else
-                    <img src="{{ asset('defalticon.png') }}" width="100" height="100">
+                    <img src="{{ asset('defalticon.png') }}" width="150" height="150">
                     @endif
                 </div>
                 <div>
@@ -23,14 +23,12 @@
                         <li class="list-group-item text-dark">スポーツ歴：{{ $loginuser_info['sports']}}</li>
                         <li class="list-group-item text-dark">自己紹介：{{ $loginuser_info['comment']}}</li>
                     </ul>
-                    <th scope="col">
+                    <div scope="col">
                         <a href="{{ route('user_info.edit', $users['id']) }}">
-                            <button type="button" class="btn btn-primary"> ユーザー情報編集</button>
+                            <button type="button" class="btn btn-primary mx-auto d-block"> ユーザー情報編集</button>
                         </a>
-                    </th>
-                    <div>
                         <a href="{{ route('post.index') }}">
-                            <button type="button" class="btn btn-secondary mt-2">投稿一覧画面へ</button>
+                            <button type="button" class="btn btn-secondary mx-auto d-block mt-2">投稿一覧画面へ</button>
                         </a>
                     </div>
                 </div>

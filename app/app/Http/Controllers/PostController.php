@@ -23,7 +23,7 @@ class PostController extends Controller
         $users = new User;
         $user_infos = UserInfo::where('user_id', Auth::id())->get();
         if (Auth::user()->role === 1) {
-            $query = User::query()->join('post', 'users.id', 'post.user_id')->orderBy('post.updated_at', 'desc');
+            $query = User::query()->join('post', 'users.id', 'post.user_id')->orderBy('post.created_at', 'desc');
             if ($search) {
                 $spaceConversion = mb_convert_kana($search, 's');
 

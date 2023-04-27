@@ -6,7 +6,7 @@
             @if($user->userinfo->images != null)
             <img src="{{ asset('storage/usersimages/'.$user->userinfo->images) }}" width="150" height="150">
             @else
-            <img src="{{ asset('defalticon.png') }} " width="100" height="100">
+            <img src="{{ asset('defalticon.png') }} " width="150" height="150">
             @endif
         </div>
         <div>
@@ -34,7 +34,7 @@
                 </div>
                 <div>
                     <p class="text-dark">お知らせイベントタイトル：{{ $event->title }}</p>
-                    <p class="text-dark">お知らせイベント内容： {{ $event->comment }}</p>
+                    <p class="text-dark d-block text-truncate" style="max-width:520px;">お知らせイベント内容： {{ $event->comment }}</p>
                 </div>
             </div>
             <br>
